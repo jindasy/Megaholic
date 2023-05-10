@@ -8,25 +8,28 @@ public class Player extends JPanel implements ActionListener {
     private int playerY;
     private int playerDY;
 
+    private PlayerState state;
+
     public Player() {
         playerX = 100;
         playerY = 300;
         playerDY = 0;
 
-        Timer timer = new Timer(40, this);
-        timer.start();
-
-        addKeyListener(new KeyAdapter() {
-            public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-                    jump();
-                }
-            }
-        });
-        setFocusable(true);
+//        Timer timer = new Timer(10, this);
+//        timer.start();
+//
+//        addKeyListener(new KeyAdapter() {
+//            public void keyPressed(KeyEvent e) {
+//                if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+//                    jump();
+//                }
+//            }
+//        });
+//        setFocusable(true);
     }
 
     private void jump() {
+        state.jump();
         if (playerY == 300) { // check if player is on the ground
             playerDY = -10; // set player's vertical velocity
         }
@@ -49,12 +52,4 @@ public class Player extends JPanel implements ActionListener {
         g.fillRect(playerX, playerY, 50, 50); // draw the player as a rectangle
     }
 
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("Player Jump");
-        Player player = new Player();
-        frame.add(player);
-        frame.setSize(500, 500);
-        frame.setVisible(true);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    }
 }
