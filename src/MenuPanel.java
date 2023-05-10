@@ -7,7 +7,7 @@ public class MenuPanel extends JPanel {
     private JLabel title;
     private JButton singleMode;
     private JButton twoPlayerMode;
-    public MenuPanel(CardLayout cardLayout) {
+    public MenuPanel() {
         setBackground(new Color(135, 206, 235));
         setPreferredSize(new Dimension(600, 600));
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
@@ -52,8 +52,14 @@ public class MenuPanel extends JPanel {
         singleMode.setFont(new Font("Verdana", Font.PLAIN, 20));
         twoPlayerMode.setFont(new Font("Verdana", Font.PLAIN, 20));
 
+    }
 
+    public JButton getSingleModeButton() {
+        return singleMode;
+    }
 
+    public JButton getTwoPlayerModeButton() {
+        return twoPlayerMode;
     }
 
 
