@@ -18,8 +18,11 @@ public class GameLogic extends JFrame {
 
     private int score = 0;
     private Image imageObstacle;
+    private Image imageObstacle2;
+
     public GameLogic() {
         imageObstacle = new ImageIcon("img/obs1.png").getImage();
+        imageObstacle2 = new ImageIcon("img/obs2.png").getImage();
 
         initGameData();
         panel = new JPanel() {
@@ -69,13 +72,12 @@ public class GameLogic extends JFrame {
                 while (running) {
                     for (Obstacle obstacle : obstacles) {
                         if (obstacle.dead()) {
-                            obstacle.reset("", SIZE+(Obstacle.SIZE+500), SIZE - SIZE/3 - Obstacle.SIZE+500, 500);
+                            obstacle.reset("", SIZE+(Obstacle.SIZE+500), SIZE - SIZE/3 - Obstacle.SIZE+500, 500,false);
                         }
                         obstacle.move();
                     }
                     panel.repaint();
 
-                    // TODO score
                     score++;
                     System.out.println(score);
 
@@ -103,7 +105,11 @@ public class GameLogic extends JFrame {
             if (obstacle.dead()) {
                 continue;
             }
-            g.drawImage(imageObstacle,obstacle.getX(), obstacle.getY(), obstacle.SIZE+100, obstacle.SIZE+100, null, null);
+            if (obstacle.isJumping()) {
+                g.drawImage(imageObstacle2,obstacle.getX(), obstacle.getY(), obstacle.SIZE+100, obstacle.SIZE+100, null, null);
+            } else {
+                g.drawImage(imageObstacle,obstacle.getX(), obstacle.getY(), obstacle.SIZE+100, obstacle.SIZE+100, null, null);
+            }
 
         }
     }
