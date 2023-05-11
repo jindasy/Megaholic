@@ -19,66 +19,28 @@ public class PanelController extends JPanel {
         // play again button for player 2 mode
         JButton playAgainTwo = twoPlayerModePanel.getPlayAgainButton();
 
-
         add(menuPanel);
 
-        Container container = this;
+        setUpButtonAction(menuPanel.getSingleModeButton(), onePlayerModePanel, this);
+        setUpButtonAction(menuPanel.getTwoPlayerModeButton(), twoPlayerModePanel, this);
+        setUpButtonAction(mainButtonOne, menuPanel, this);
+        setUpButtonAction(playAgainOne, onePlayerModePanel, this);
+        setUpButtonAction(mainButtonTwo, menuPanel, this);
+        setUpButtonAction(playAgainTwo, twoPlayerModePanel, this);
 
-        menuPanel.getSingleModeButton().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                container.removeAll();
-                container.add(onePlayerModePanel);
-                container.revalidate();
-                container.repaint();
-            }
-        });
-        menuPanel.getTwoPlayerModeButton().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                container.removeAll();
-                container.add(twoPlayerModePanel);
-                container.revalidate();
-                container.repaint();
-            }
-        });
-        mainButtonOne.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                container.removeAll();
-                container.add(menuPanel);
-                container.revalidate();
-                container.repaint();
-            }
-        });
-        playAgainOne.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                container.removeAll();
-                container.add(onePlayerModePanel);
-                container.revalidate();
-                container.repaint();
-            }
-        });
-
-        mainButtonTwo.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                container.removeAll();
-                container.add(menuPanel);
-                container.revalidate();
-                container.repaint();
-            }
-        });
-
-        playAgainTwo.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                container.removeAll();
-                container.add(twoPlayerModePanel);
-                container.revalidate();
-                container.repaint();
-            }
-        });
     }
+
+    public void setUpButtonAction(JButton button, JPanel toChangeToPanel, Container container) {
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                container.removeAll();
+                container.add(toChangeToPanel);
+                container.revalidate();
+                container.repaint();
+            }
+        });
+
+    }
+
 }
