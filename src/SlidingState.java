@@ -7,6 +7,7 @@ public class SlidingState implements PlayerState, ActionListener {
 
     public SlidingState(Player player) {
         this.player = player;
+        this.action();
 
         Timer timer = new Timer(10, this);
         timer.start();
@@ -16,7 +17,7 @@ public class SlidingState implements PlayerState, ActionListener {
         System.out.println("SLIDE");
         int height = player.getHeight();
         int width = player.getWidth();
-        player.setPlayerY((height-width)+player.getPlayerY());
+        player.setY((height-width)+player.getY());
         player.setWidth(height);
         player.setHeight(width);
     }

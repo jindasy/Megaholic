@@ -106,7 +106,7 @@ public class GameLogic extends JFrame implements KeyListener {
 
     private void drawPlayer(Graphics g) {
         g.setColor(Color.blue);
-        g.fillRect(player.getPlayerX(), player.getPlayerY(), player.getWidth(), player.getHeight() );
+        g.fillRect(player.getX(), player.getY(), player.getWidth(), player.getHeight() );
     }
 
     private void isGameOver() {

@@ -6,6 +6,7 @@ public class JumpingState implements PlayerState, ActionListener {
     private Player player;
     public JumpingState(Player player) {
         this.player = player;
+        this.action();
 
         Timer timer = new Timer(10, this);
         timer.start();
@@ -15,7 +16,7 @@ public class JumpingState implements PlayerState, ActionListener {
     public void action() {
         System.out.println("JUMP");
 
-        if (player.getPlayerY() == 300) { // check if player is on the ground
+        if (player.getY() == 300) { // check if player is on the ground
 //            System.out.println("OnGround");
             player.setVelocityY(-10);
         }
@@ -23,17 +24,17 @@ public class JumpingState implements PlayerState, ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        player.setPlayerY(player.getPlayerY() + player.getVelocityY());
+        player.setY(player.getY() + player.getVelocityY());
 //        System.out.println(player.getPlayerY());
-        if (player.getPlayerY() < 300) {
+        if (player.getY() < 300) {
 //            System.out.println("Up");
             player.setVelocityY(player.getVelocityY() + 1);
 //            System.out.println(player.getPlayerY());
 
         }
-        else if (player.getPlayerY() > 300) {
+        else if (player.getY() > 300) {
 //            System.out.println("Down");
-            player.setPlayerY(300);
+            player.setY(300);
             player.setVelocityY(0);
         }
     }

@@ -20,16 +20,16 @@ public class PlayerController{
 
             if (!(player.getState() instanceof SlidingState)) {
                 player.setState(new SlidingState(player));
-                player.getState().action();
+//                player.getState().action();
             }
             if (!isPressed) {
                 player.setState(new RunningState(player));
-                player.getState().action();
+//                player.getState().action();
             }
         }
         else {
             player.setState(new RunningState(player));
-            player.getState().action();
+//            player.getState().action();
         }
     }
 

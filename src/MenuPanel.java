@@ -15,25 +15,7 @@ public class MenuPanel extends JPanel {
         // create components in main
         title = new JLabel("Megaholic");
         singleMode = new JButton("1-Player");
-        singleMode.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Show OnePlayerModeUI
-                setVisible(false);
-                OnePlayerModePanel onePlayerModeUI = new OnePlayerModePanel();
-                add(onePlayerModeUI);
-                setVisible(false);
-
-            }
-        });
-
         twoPlayerMode = new JButton("2-Player");
-        twoPlayerMode.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Show TwoPlayerModeUI
-            }
-        });
 
         // add components to panel
         add(Box.createRigidArea(new Dimension(0,200)));

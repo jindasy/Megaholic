@@ -4,57 +4,43 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class PanelController extends JPanel {
-    private MenuPanel menuPanel;
-    private OnePlayerModePanel onePlayerModePanel;
-    private TwoPlayerModePanel twoPlayerModePanel;
-
-    private CardLayout card = new CardLayout();
+    private MenuPanel menuPanel = new MenuPanel();
+    private OnePlayerModePanel onePlayerModePanel = new OnePlayerModePanel();
+    private TwoPlayerModePanel twoPlayerModePanel = new TwoPlayerModePanel();
 
 
-    private JButton button1 = new JButton("Button 1");
-    private JButton mainButtonOne = new JButton("Main");
-    private JButton mainButtonTwo = new JButton("Main");
     public PanelController() {
-        menuPanel = new MenuPanel();
-        onePlayerModePanel = new OnePlayerModePanel();
-        twoPlayerModePanel = new TwoPlayerModePanel();
-        setLayout(card);
+        // main button for player 1 mode
+        JButton mainButtonOne = onePlayerModePanel.getMainButton();
+        // play again button for player 1 mode
+        JButton playAgainOne = onePlayerModePanel.getPlayAgainButton();
+        // main button in player 2 mode
+        JButton mainButtonTwo = twoPlayerModePanel.getMainButton();
+        // play again button for player 2 mode
+        JButton playAgainTwo = twoPlayerModePanel.getPlayAgainButton();
 
-//        menuPanel.add(button1);
-        onePlayerModePanel.add(mainButtonOne);
-        twoPlayerModePanel.add(mainButtonTwo);
+        add(menuPanel);
 
-        add(menuPanel, "menu");
-        add(onePlayerModePanel, "one");
-        add(twoPlayerModePanel, "two");
-        card.show(this, "menu");
+        setUpButtonAction(menuPanel.getSingleModeButton(), onePlayerModePanel, this);
+        setUpButtonAction(menuPanel.getTwoPlayerModeButton(), twoPlayerModePanel, this);
+        setUpButtonAction(mainButtonOne, menuPanel, this);
+        setUpButtonAction(playAgainOne, onePlayerModePanel, this);
+        setUpButtonAction(mainButtonTwo, menuPanel, this);
+        setUpButtonAction(playAgainTwo, twoPlayerModePanel, this);
 
-        Container container = this;
-
-        menuPanel.getSingleModeButton().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                card.show(container, "one");
-            }
-        });
-        menuPanel.getTwoPlayerModeButton().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                card.show(container, "two");
-            }
-        });
-        mainButtonOne.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                card.show(container, "menu");
-            }
-        });
-
-        mainButtonTwo.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                card.show(container, "menu");
-            }
-        });
     }
+
+    public void setUpButtonAction(JButton button, JPanel toChangeToPanel, Container container) {
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                container.removeAll();
+                container.add(toChangeToPanel);
+                container.revalidate();
+                container.repaint();
+            }
+        });
+
+    }
+
 }

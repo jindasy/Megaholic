@@ -3,8 +3,8 @@ import java.awt.*;
 
 
 public class Player extends JPanel {
-    private int playerX;
-    private int playerY;
+    private int x;
+    private int y;
     private int velocityY;
     private int width = 50;
     private int height = 100;
@@ -12,26 +12,26 @@ public class Player extends JPanel {
     private PlayerState state;
 
     public Player() {
-        playerX = 100;
-        playerY = 300;
+        x = 100;
+        y = 300;
         velocityY = 2;
         state = new RunningState(this);
     }
 
     public void reset() {
-        playerX = 100;
-        playerY = 300;
+        x = 100;
+        y = 300;
         velocityY = 2;
         width = 50;
         height = 100;
     }
 
-    public int getPlayerX() {
-        return playerX;
+    public int getX() {
+        return x;
     }
 
-    public int getPlayerY() {
-        return playerY;
+    public int getY() {
+        return y;
     }
 
     public int getVelocityY() {
@@ -46,8 +46,8 @@ public class Player extends JPanel {
         this.velocityY = velocityY;
     }
 
-    public void setPlayerY(int playerY) {
-        this.playerY = playerY;
+    public void setY(int y) {
+        this.y = y;
     }
 
     public void setState(PlayerState state){
@@ -74,6 +74,6 @@ public class Player extends JPanel {
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.fillRect(playerX, playerY, width, height); // draw the player as a rectangle
+        g.fillRect(x, y, width, height); // draw the player as a rectangle
     }
 }
