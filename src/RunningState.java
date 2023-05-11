@@ -1,11 +1,12 @@
-public class RunningState extends PlayerState{
-    @Override
-    void jump() {
-        super.jump();
+public class RunningState implements PlayerState{
+    private Player player;
+    public RunningState(Player player) {
+        this.player = player;
     }
 
     @Override
-    void slide() {
-        super.slide();
+    public void action() {
+        System.out.println("RUNNING");
+        player.reset();
     }
 }

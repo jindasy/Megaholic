@@ -1,55 +1,79 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 
-public class Player extends JPanel implements ActionListener {
 
+public class Player extends JPanel {
     private int playerX;
     private int playerY;
-    private int playerDY;
+    private int velocityY;
+    private int width = 50;
+    private int height = 100;
 
     private PlayerState state;
 
     public Player() {
         playerX = 100;
         playerY = 300;
-        playerDY = 0;
-
-//        Timer timer = new Timer(10, this);
-//        timer.start();
-//
-//        addKeyListener(new KeyAdapter() {
-//            public void keyPressed(KeyEvent e) {
-//                if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-//                    jump();
-//                }
-//            }
-//        });
-//        setFocusable(true);
+        velocityY = 2;
+        state = new RunningState(this);
     }
 
-    private void jump() {
-        state.jump();
-        if (playerY == 300) { // check if player is on the ground
-            playerDY = -10; // set player's vertical velocity
-        }
+    public void reset() {
+        playerX = 100;
+        playerY = 300;
+        velocityY = 2;
+        width = 50;
+        height = 100;
     }
 
-    public void actionPerformed(ActionEvent e) {
-        playerY += playerDY; // update player's position based on vertical velocity
-        if (playerY < 300) { // if player is in the air
-            playerDY++; // increase player's vertical velocity due to gravity
-        }
-        if (playerY > 300) { // if player is below the ground
-            playerY = 300; // reset player's position to the ground
-            playerDY = 0; // reset player's vertical velocity
-        }
-        repaint(); // redraw the player on the screen
+    public int getPlayerX() {
+        return playerX;
+    }
+
+    public int getPlayerY() {
+        return playerY;
+    }
+
+    public int getVelocityY() {
+        return velocityY;
+    }
+
+    public PlayerState getState() {
+        return state;
+    }
+
+    public void setVelocityY(int velocityY) {
+        this.velocityY = velocityY;
+    }
+
+    public void setPlayerY(int playerY) {
+        this.playerY = playerY;
+    }
+
+    public void setState(PlayerState state){
+        this.state = state;
+    }
+
+    @Override
+    public int getHeight() {
+        return height;
+    }
+
+    @Override
+    public int getWidth() {
+        return width;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
     }
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.fillRect(playerX, playerY, 50, 50); // draw the player as a rectangle
+        g.fillRect(playerX, playerY, width, height); // draw the player as a rectangle
     }
-
 }

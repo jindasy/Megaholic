@@ -1,10 +1,3 @@
-public abstract class PlayerState {
-    void jump() {
-
-    }
-
-    void slide() {
-
-    }
-
+public interface PlayerState {
+    void action();
 }
