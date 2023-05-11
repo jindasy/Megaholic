@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.swing.*;
 
@@ -16,8 +17,9 @@ public class GameLogic extends JFrame {
     private boolean running;
 
     private int score = 0;
-
+    private Image imageCell;
     public GameLogic() {
+        imageCell = new ImageIcon("img/obs1.png").getImage();
         initGameData();
         panel = new JPanel() {
             @Override
@@ -36,15 +38,15 @@ public class GameLogic extends JFrame {
 
     private void initGameData() {
         score = 0;
-        int obstacle_size = 30;
         int start_x = SIZE;
-        int start_y = SIZE - SIZE/2 - obstacle_size;
-        // spawn obstacle
+        Random random = new Random();
+        int obstacle_size = 30;
         for (int i = 0; i < 100; i++) {
-            obstacles.add(obstaclePool.getObstacle(start_x,start_y));
-            start_x += obstacle_size * 3;
-
+            int obstacle_y = random.nextInt(SIZE - obstacle_size * 2) + obstacle_size;
+            obstacles.add(obstaclePool.getObstacle(start_x, obstacle_y));
+            start_x += obstacle_size * 6;
         }
+
 
     }
 
@@ -93,7 +95,8 @@ public class GameLogic extends JFrame {
             if (obstacle.dead()) {
                 continue;
             }
-            g.fillOval(obstacle.getX(), obstacle.getY(), obstacle.SIZE, obstacle.SIZE);
+            g.drawImage(imageCell,obstacle.getX(), obstacle.getY(), obstacle.SIZE+100, obstacle.SIZE+100, null, null);
+
         }
     }
 
