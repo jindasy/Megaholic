@@ -17,9 +17,10 @@ public class GameLogic extends JFrame {
     private boolean running;
 
     private int score = 0;
-    private Image imageCell;
+    private Image imageObstacle;
     public GameLogic() {
-        imageCell = new ImageIcon("img/obs1.png").getImage();
+        imageObstacle = new ImageIcon("img/obs1.png").getImage();
+
         initGameData();
         panel = new JPanel() {
             @Override
@@ -41,16 +42,19 @@ public class GameLogic extends JFrame {
         int start_x = SIZE;
         Random random = new Random();
         int obstacle_size = 30;
-        int min_y = obstacle_size*3;
-        int max_y = SIZE-obstacle_size*2;
+        int min_y = 200 + obstacle_size*3; // obstacle appears only at y >= 200
+        int max_y = 400 - obstacle_size*2;
         obstacles.clear();
         obstacles.add(obstaclePool.getObstacle(start_x, random.nextInt(max_y - min_y) + min_y));
 
         while (start_x < 50000) {
             int obstacle_y = random.nextInt(max_y - min_y) + min_y;
             Obstacle lastObstacle = obstacles.get(obstacles.size() - 1);
+//            System.out.println("---->"+obstacle_y);
+//            System.out.println("===>"+start_x);
             if (start_x - lastObstacle.getX() > obstacle_size * 6) {
                 obstacles.add(obstaclePool.getObstacle(start_x, obstacle_y));
+
             }
             start_x += obstacle_size * 6;
         }
@@ -61,8 +65,6 @@ public class GameLogic extends JFrame {
 
     private void start() {
         running = true;
-
-
         thread = new Thread() {
             @Override
             public void run() {
@@ -95,6 +97,7 @@ public class GameLogic extends JFrame {
     private void drawBackground(Graphics g) {
         g.setColor(Color.white);
         g.fillRect(0, 0, SIZE, SIZE);
+
     }
 
     private void drawObstacle(Graphics g) {
@@ -103,7 +106,7 @@ public class GameLogic extends JFrame {
             if (obstacle.dead()) {
                 continue;
             }
-            g.drawImage(imageCell,obstacle.getX(), obstacle.getY(), obstacle.SIZE+100, obstacle.SIZE+100, null, null);
+            g.drawImage(imageObstacle,obstacle.getX(), obstacle.getY(), obstacle.SIZE+100, obstacle.SIZE+100, null, null);
 
         }
     }

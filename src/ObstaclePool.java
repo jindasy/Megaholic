@@ -17,15 +17,15 @@ public class ObstaclePool {
 
     public Obstacle getObstacle(int x, int y) {
         int obstacleSize = Obstacle.SIZE;
-        int obstacleY;
+        int obstacleY = Math.max(Math.min(y, 400 - obstacleSize), 200);
+        int obstacleX = Math.max(x, Math.min(obstacleSize/3, x*2));
         if (random.nextBoolean()) {
             // obstacle position for jump
-            obstacleY = y - obstacleSize * 20;
+            obstacleY = y - obstacleSize * 10;
         } else {
             // obstacle position for slide
             obstacleY = y - obstacleSize;
         }
-        int obstacleX = Math.max(x, Math.min(Obstacle.SIZE - obstacleSize, x*2));
 
         Obstacle obstacle = obstacles.get(index);
         obstacle.reset("obj", obstacleX, obstacleY, obstacleSize);
