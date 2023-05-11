@@ -1,78 +1,79 @@
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import java.awt.*;
 
-public class Player extends JPanel implements ActionListener {
 
-    public static final int MAX_HEALTH = 20;
-    public static final float MAX_V = 1.0f;
-    public static final int WIDTH = 50;
-    public static final int HEIGHT = 150;
-    private String name;
-    private int hp;
-    private float x, y;
-    private double vx, vy;
-    private double ax, ay;
+public class Player extends JPanel {
+    private int x;
+    private int y;
+    private int velocityY;
+    private int width = 50;
+    private int height = 100;
 
-    public Player(String name) {
-        this.name = name;
-        this.hp = 30;
-        this.x = 100;
-        this.y = GameLogic.SIZE - HEIGHT - GameLogic.SIZE / 2;
-        this.vx = 2;
-        this.vy = 2;
-        this.ax = 0;
-        this.ay = 9.8;
+    private PlayerState state;
 
-        Timer timer = new Timer(20, this);
-        timer.start();
-
-        addKeyListener(new KeyAdapter() {
-            public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_UP) {
-                    jump();
-                }
-            }
-        });
-        setFocusable(true);
+    public Player() {
+        x = 100;
+        y = 300;
+        velocityY = 2;
+        state = new RunningState(this);
     }
 
-    public void move() {
-        if (dead()) {
-            return;
-        }
+    public void reset() {
+        x = 100;
+        y = 300;
+        velocityY = 2;
+        width = 50;
+        height = 100;
     }
 
     public int getX() {
-        return (int) x;
+        return x;
     }
 
     public int getY() {
-        return (int) y;
+        return y;
     }
 
-    public boolean dead() {
-        return x <= 0;
+    public int getVelocityY() {
+        return velocityY;
     }
 
-    public void jump() {
-        if (y == 300) { // check if player is on the ground
-            vy = -10; // set player's vertical velocity
-        }
+    public PlayerState getState() {
+        return state;
     }
 
-    public void actionPerformed(ActionEvent e) {
-        y += vy; // update player's position based on vertical velocity
-        if (y < 300) { // if player is in the air
-            vy++; // increase player's vertical velocity due to gravity
-        }
-        if (y > 300) { // if player is below the ground
-            y = 300; // reset player's position to the ground
-            vy = 0; // reset player's vertical velocity
-        }
-        repaint(); // redraw the player on the screen
+    public void setVelocityY(int velocityY) {
+        this.velocityY = velocityY;
     }
 
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public void setState(PlayerState state){
+        this.state = state;
+    }
+
+    @Override
+    public int getHeight() {
+        return height;
+    }
+
+    @Override
+    public int getWidth() {
+        return width;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.fillRect(x, y, width, height); // draw the player as a rectangle
+    }
 }

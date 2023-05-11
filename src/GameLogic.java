@@ -1,18 +1,21 @@
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.*;
 
-public class GameLogic extends JFrame {
+public class GameLogic extends JFrame implements KeyListener {
 
     public static final int SIZE = 800;
 
     private JPanel panel;
     private List<Obstacle> obstacles = new ArrayList<Obstacle>();
-    private Player player = new Player("a");
+    private Player player;
     private Thread thread;
     private boolean running;
+    private PlayerController controller;
 
     private int score = 0;
 
@@ -45,14 +48,16 @@ public class GameLogic extends JFrame {
             start_x += 2* Obstacle.SIZE + 50;
             obstacles.add(obstacle);
         }
+        player = new Player();
+        controller = new PlayerController(player);
         add(player);
-
     }
 
 
     private void start() {
         running = true;
-
+        panel.addKeyListener(this);
+        panel.setFocusable(true);
 
         thread = new Thread() {
             @Override
@@ -65,11 +70,12 @@ public class GameLogic extends JFrame {
                         }
                         obstacle.move();
                     }
+
                     panel.repaint();
 
                     // TODO score
                     score++;
-                    System.out.println(score);
+//                    System.out.println(score);
 
                     try {
                         Thread.sleep(1000 / 60);
@@ -100,7 +106,7 @@ public class GameLogic extends JFrame {
 
     private void drawPlayer(Graphics g) {
         g.setColor(Color.blue);
-        g.fillRect(player.getX(), player.getY(), player.WIDTH, player.HEIGHT );
+        g.fillRect(player.getX(), player.getY(), player.getWidth(), player.getHeight() );
     }
 
     private void isGameOver() {
@@ -114,4 +120,20 @@ public class GameLogic extends JFrame {
         game.start();
     }
 
+    @Override
+    public void keyTyped(KeyEvent e) {
+//        controller.handleInput(e);
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        controller.setPressed(true);
+        controller.handleInput(e);
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        controller.setPressed(false);
+        controller.handleInput(e);
+    }
 }
