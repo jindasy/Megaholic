@@ -41,14 +41,15 @@ public class GameLogic extends JFrame {
         int start_x = SIZE;
         Random random = new Random();
         int obstacle_size = 30;
+        int min_y = obstacle_size*3;
+        int max_y = SIZE-obstacle_size*2;
         for (int i = 0; i < 100; i++) {
-            int obstacle_y = random.nextInt(SIZE - obstacle_size * 2) + obstacle_size;
+            int obstacle_y = random.nextInt(max_y - min_y) + min_y;
             obstacles.add(obstaclePool.getObstacle(start_x, obstacle_y));
             start_x += obstacle_size * 6;
         }
-
-
     }
+
 
 
     private void start() {
@@ -62,7 +63,7 @@ public class GameLogic extends JFrame {
                 while (running) {
                     for (Obstacle obstacle : obstacles) {
                         if (obstacle.dead()) {
-                            obstacle.reset("", SIZE+(Obstacle.SIZE+50), SIZE - SIZE/3 - Obstacle.SIZE, 30);
+                            obstacle.reset("", SIZE+(Obstacle.SIZE+500), SIZE - SIZE/3 - Obstacle.SIZE+500, 500);
                         }
                         obstacle.move();
                     }

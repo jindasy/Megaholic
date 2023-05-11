@@ -24,6 +24,8 @@ public class ObstaclePool {
             // obstacle position for slide
             obstacleY = y - obstacleSize;
         }
+        int obstacleX = Math.max(x, Math.min(Obstacle.SIZE - obstacleSize, x*2));
+
         Obstacle obstacle = obstacles.get(index);
         obstacle.reset("obj", x, obstacleY, obstacleSize);
         index = (index + 1) % obstacles.size();
