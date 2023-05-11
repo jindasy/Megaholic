@@ -10,7 +10,7 @@ public class GameLogic extends JFrame {
 
     private JPanel panel;
     private List<Obstacle> obstacles = new ArrayList<Obstacle>();
-    private Player player;
+    private Player player = new Player("a");
     private Thread thread;
     private boolean running;
 
@@ -45,8 +45,7 @@ public class GameLogic extends JFrame {
             start_x += 2* Obstacle.SIZE + 50;
             obstacles.add(obstacle);
         }
-//        player = new Player();
-//        add(player);
+        add(player);
 
     }
 
@@ -100,8 +99,8 @@ public class GameLogic extends JFrame {
     }
 
     private void drawPlayer(Graphics g) {
-//        g.setColor(Color.blue);
-//        g.fillRect(100,100, 100, 400 );
+        g.setColor(Color.blue);
+        g.fillRect(player.getX(), player.getY(), player.WIDTH, player.HEIGHT );
     }
 
     private void isGameOver() {
