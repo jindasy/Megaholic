@@ -50,11 +50,8 @@ public class GameLogic extends JFrame {
         while (start_x < 50000) {
             int obstacle_y = random.nextInt(max_y - min_y) + min_y;
             Obstacle lastObstacle = obstacles.get(obstacles.size() - 1);
-//            System.out.println("---->"+obstacle_y);
-//            System.out.println("===>"+start_x);
             if (start_x - lastObstacle.getX() > obstacle_size * 6) {
                 obstacles.add(obstaclePool.getObstacle(start_x, obstacle_y));
-
             }
             start_x += obstacle_size * 6;
         }

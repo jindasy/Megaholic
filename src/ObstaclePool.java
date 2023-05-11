@@ -17,7 +17,7 @@ public class ObstaclePool {
 
     public Obstacle getObstacle(int x, int y) {
         int obstacleSize = Obstacle.SIZE;
-        int obstacleY = Math.max(Math.min(y, 400 - obstacleSize), 200);
+        int obstacleY;
         int obstacleX = Math.max(x, Math.min(obstacleSize/3, x*2));
         if (random.nextBoolean()) {
             // obstacle position for jump
