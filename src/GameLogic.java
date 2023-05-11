@@ -10,6 +10,7 @@ public class GameLogic extends JFrame {
 
     private JPanel panel;
     private List<Obstacle> obstacles = new ArrayList<Obstacle>();
+    private ObstaclePool obstaclePool = new ObstaclePool();
     private Player player;
     private Thread thread;
     private boolean running;
@@ -39,14 +40,11 @@ public class GameLogic extends JFrame {
         int start_x = SIZE;
         int start_y = SIZE - SIZE/2 - obstacle_size;
         // spawn obstacle
-        // TODO use object pool
-        for (int i = 0; i < 8; i++) {
-            Obstacle obstacle = new Obstacle("Obs" + (i + 1), start_x, start_y, obstacle_size);
-            start_x += 2* Obstacle.SIZE + 50;
-            obstacles.add(obstacle);
+        for (int i = 0; i < 100; i++) {
+            obstacles.add(obstaclePool.getObstacle(start_x,start_y));
+            start_x += obstacle_size * 3;
+
         }
-//        player = new Player();
-//        add(player);
 
     }
 
@@ -100,8 +98,8 @@ public class GameLogic extends JFrame {
     }
 
     private void drawPlayer(Graphics g) {
-//        g.setColor(Color.blue);
-//        g.fillRect(100,100, 100, 400 );
+        g.setColor(Color.blue);
+        g.fillRect(100,100, 100, 400 );
     }
 
     private void isGameOver() {

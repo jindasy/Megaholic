@@ -1,4 +1,4 @@
-public class Obstacle{
+public class Obstacle {
 
     public static final int MAX_HEALTH = 20;
     public static final float MAX_V = 1.0f;
@@ -37,6 +37,10 @@ public class Obstacle{
         return (int) y;
     }
 
+    public void setVx(float newVx) {
+        this.vx = newVx;
+    }
+
     public boolean dead() {
         return x <= 0;
     }
@@ -46,6 +50,7 @@ public class Obstacle{
         this.x = x;
         this.y = y;
         this.size = size;
-    }
 
+    }
 }
+
