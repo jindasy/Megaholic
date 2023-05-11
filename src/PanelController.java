@@ -10,8 +10,15 @@ public class PanelController extends JPanel {
 
 
     public PanelController() {
+        // main button for player 1 mode
         JButton mainButtonOne = onePlayerModePanel.getMainButton();
+        // play again button for player 1 mode
+        JButton playAgainOne = onePlayerModePanel.getPlayAgainButton();
+        // main button in player 2 mode
         JButton mainButtonTwo = twoPlayerModePanel.getMainButton();
+        // play again button for player 2 mode
+        JButton playAgainTwo = twoPlayerModePanel.getPlayAgainButton();
+
 
         add(menuPanel);
 
@@ -44,12 +51,31 @@ public class PanelController extends JPanel {
                 container.repaint();
             }
         });
+        playAgainOne.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                container.removeAll();
+                container.add(onePlayerModePanel);
+                container.revalidate();
+                container.repaint();
+            }
+        });
 
         mainButtonTwo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 container.removeAll();
                 container.add(menuPanel);
+                container.revalidate();
+                container.repaint();
+            }
+        });
+
+        playAgainTwo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                container.removeAll();
+                container.add(twoPlayerModePanel);
                 container.revalidate();
                 container.repaint();
             }
