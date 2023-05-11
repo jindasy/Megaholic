@@ -5,7 +5,6 @@ public class OnePlayerModePanel extends JPanel{
 
     private JButton mainButton = new JButton("Main");
 
-    private JLabel title;
 
     public OnePlayerModePanel() {
         setBackground(new Color(135, 206, 235));

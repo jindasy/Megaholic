@@ -6,7 +6,7 @@ public class Game extends JFrame {
     public Game() {
         JPanel panelController = new PanelController();
         add(panelController);
-        setSize(600, 600);
+        setSize(600, 633);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
 
