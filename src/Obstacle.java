@@ -37,9 +37,6 @@ public class Obstacle {
         return (int) y;
     }
 
-    public void setVx(float newVx) {
-        this.vx = newVx;
-    }
 
     public boolean dead() {
         return x <= 0;

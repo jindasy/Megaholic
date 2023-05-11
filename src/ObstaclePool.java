@@ -9,10 +9,11 @@ public class ObstaclePool {
     private Random random = new Random();
 
     public ObstaclePool() {
-        for(int i = 0; i < 1000000; i++) {
+        for(int i = 0; i < 1000; i++) {
             obstacles.add(new Obstacle("obj", 0, 0, 19));
         }
     }
+
 
     public Obstacle getObstacle(int x, int y) {
         int obstacleSize = Obstacle.SIZE;
@@ -27,8 +28,9 @@ public class ObstaclePool {
         int obstacleX = Math.max(x, Math.min(Obstacle.SIZE - obstacleSize, x*2));
 
         Obstacle obstacle = obstacles.get(index);
-        obstacle.reset("obj", x, obstacleY, obstacleSize);
+        obstacle.reset("obj", obstacleX, obstacleY, obstacleSize);
         index = (index + 1) % obstacles.size();
+
         return obstacle;
     }
 }
