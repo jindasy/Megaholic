@@ -20,11 +20,13 @@ public class Player extends JPanel implements ActionListener {
         this.name = name;
         this.hp = 30;
         this.x = 100;
-        this.y = GameLogic.SIZE - HEIGHT - GameLogic.SIZE / 2;
+        this.y = 200;
         this.vx = 2;
         this.vy = 2;
         this.ax = 0;
         this.ay = 9.8;
+
+        setFocusable(true);
 
         Timer timer = new Timer(20, this);
         timer.start();
@@ -58,21 +60,22 @@ public class Player extends JPanel implements ActionListener {
     }
 
     public void jump() {
-        if (y == 300) { // check if player is on the ground
+        if (y == 312) { // check if player is on the ground
             vy = -10; // set player's vertical velocity
         }
     }
 
     public void actionPerformed(ActionEvent e) {
         y += vy; // update player's position based on vertical velocity
-        if (y < 300) { // if player is in the air
+        if (y < 312) { // if player is in the air
             vy++; // increase player's vertical velocity due to gravity
         }
-        if (y > 300) { // if player is below the ground
-            y = 300; // reset player's position to the ground
+        if (y > 312) { // if player is below the ground
+            y = 312; // reset player's position to the ground
             vy = 0; // reset player's vertical velocity
         }
-        repaint(); // redraw the player on the screen
     }
+
+
 
 }

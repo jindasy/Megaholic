@@ -21,12 +21,25 @@ public class PanelController extends JPanel {
 
         add(menuPanel);
 
-        setUpButtonAction(menuPanel.getSingleModeButton(), onePlayerModePanel, this);
+        Container container = this;
+        menuPanel.getSingleModeButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                container.removeAll();
+                container.add(onePlayerModePanel);
+                container.revalidate();
+                container.repaint();
+            }
+        });
+
+//        setUpButtonAction(menuPanel.getSingleModeButton(), onePlayerModePanel, this);
         setUpButtonAction(menuPanel.getTwoPlayerModeButton(), twoPlayerModePanel, this);
         setUpButtonAction(mainButtonOne, menuPanel, this);
         setUpButtonAction(playAgainOne, onePlayerModePanel, this);
         setUpButtonAction(mainButtonTwo, menuPanel, this);
         setUpButtonAction(playAgainTwo, twoPlayerModePanel, this);
+
+
 
     }
 
