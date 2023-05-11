@@ -11,6 +11,8 @@ public class Obstacle{
 
     private int size;
 
+    private double obstacleSpeed = 1;
+
 
     public Obstacle(String name, int x, int y, int size) {
         this.name = name;
@@ -25,7 +27,7 @@ public class Obstacle{
         if (dead()) {
             return;
         }
-        x -= vx;
+        x -= vx * obstacleSpeed;
 
     }
 
@@ -46,6 +48,10 @@ public class Obstacle{
         this.x = x;
         this.y = y;
         this.size = size;
+    }
+
+    public void increaseObstacleSpeed() {
+        obstacleSpeed = obstacleSpeed + (0.001);
     }
 
 }
