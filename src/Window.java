@@ -35,7 +35,7 @@ public class Window extends JFrame implements Observer {
         setSize(size, size);
         setAlwaysOnTop(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        imageObstacle = new ImageIcon("images/obs1.png").getImage();
+        imageObstacle = new ImageIcon("images/obs2.png").getImage();
         imageObstacle2 = new ImageIcon("images/obs2.png").getImage();
     }
 
