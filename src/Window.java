@@ -19,6 +19,8 @@ public class Window extends JFrame implements Observer {
     ImageIcon img = new ImageIcon("images/1-player-bg.png");
 
     private JFrame parent = this;
+    Image imageObstacle;
+    Image imageObstacle2;
 
 
     public Window() {
@@ -34,7 +36,8 @@ public class Window extends JFrame implements Observer {
         setSize(size, size);
         setAlwaysOnTop(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-
+        imageObstacle = new ImageIcon("images/obs1.png").getImage();
+        imageObstacle2 = new ImageIcon("images/obs2.png").getImage();
     }
 
     @Override
@@ -67,15 +70,20 @@ public class Window extends JFrame implements Observer {
 
         private void paintPlayer(Graphics g) {
             g.setColor(Color.blue);
-            g.fillRect(player.getX(), player.getY(), player.WIDTH, player.HEIGHT );
+            g.fillRect(player.getX(), player.getY(), player.WIDTH-30, player.HEIGHT-30 );
         }
 
         private void paintObstacles(Graphics g) {
             g.setColor(Color.red);
             for(Obstacle e : gameLogic.getObstacle()) {
-                int x = e.getX();
-                int y = e.getY();
-                g.fillRect(x,y,30, 30);
+                if (e.dead()) {
+                    continue;
+                }
+                if (e.isJumping()) {
+                    g.drawImage(imageObstacle2,e.getX(), e.getY(), 80, 80, null, null);
+                } else {
+                    g.drawImage(imageObstacle,e.getX(), e.getY(), 80, 80, null, null);
+                }
             }
         }
     }

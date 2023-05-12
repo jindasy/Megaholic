@@ -2,6 +2,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
+import java.util.Random;
 
 import javax.swing.*;
 
@@ -12,31 +13,37 @@ public class GameLogic extends Observable {
     private Player player = new Player("a", 320);
     private Thread thread;
     private boolean running;
+    private ObstaclesPool obstaclePool = new ObstaclesPool();
+
 
     private int score = 0;
 
     public GameLogic() {
         score = 0;
-        // TODO use object pool
+        obstacles.clear();
+
+        int obstacle_size = 30;
+        int min_y = 200 + obstacle_size*3; // obstacle appears only at y >= 200
+        int max_y = 400 - obstacle_size*2;
+        int start_x = SIZE;
+        Random random = new Random();
+        obstacles.add(obstaclePool.getObstacle(start_x, random.nextInt(max_y - min_y) + min_y));
+        while (start_x < 50000) {
+            int obstacle_y = random.nextInt(max_y - min_y) + min_y;
+            Obstacle lastObstacle = obstacles.get(obstacles.size() - 1);
+            if (start_x - lastObstacle.getX() > obstacle_size * 6) {
+                obstacles.add(obstaclePool.getObstacle(start_x, obstacle_y));
+            }
+            start_x += 2* Obstacle.SIZE + 50;
+        }
+
     }
 
     public void start() {
         running = true;
         score = 0;
-        obstacles.clear();
         player.initializeState();
         System.out.println(player.getX());
-        int obstacle_size = 30;
-        int start_x = SIZE;
-        int start_y = SIZE - SIZE/2 - obstacle_size;
-        for (int i = 0; i < 8; i++) {
-            Obstacle obstacle = new Obstacle("Obs" + (i + 1), start_x, start_y, obstacle_size);
-            start_x += 2* Obstacle.SIZE + 50;
-            obstacles.add(obstacle);
-        }
-
-
-
         thread = new Thread() {
             @Override
             public void run() {
@@ -48,7 +55,7 @@ public class GameLogic extends Observable {
                             running = false;
                         }
                         if (obstacle.dead()) {
-                            obstacle.reset("", SIZE+(Obstacle.SIZE+50), SIZE - SIZE/3 - Obstacle.SIZE, 30);
+                            obstacle.reset("", SIZE+(Obstacle.SIZE+500), SIZE - SIZE/3 - Obstacle.SIZE+500, 30,false);
                         }
                         obstacle.move();
                     }
