@@ -34,6 +34,6 @@ There's only one rule. Don't collide with the obstacles!!!
 ## Design patterns used
 1. **Object pool pattern** is used to generate Obstacle from ObstaclesPool.
 2. **Singleton pattern** is used to get the instance of ObstaclesPool to make sure that it is created only once.
-3. **State pattern** is used to change the behaviour of Player according to its state (e.g. jumping, and sliding)
+3. **State pattern** is used to change the behaviour of Player according to its state (e.g. jumping, and sliding).
 4. **Observer pattern** allows OnePlayerModeLogic to notify any changes to OnePlayerModeUI as well as allows 
 TwoPlayerModeLogic to notify any changes to TwoPlayerModeUI so that they updates accordingly.  
