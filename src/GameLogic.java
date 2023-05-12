@@ -1,8 +1,6 @@
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import javax.swing.*;
 
@@ -15,7 +13,6 @@ public class GameLogic extends JFrame {
     private Player player;
     private Thread thread;
     private boolean running;
-    Timer timer = new Timer();
 
     private int score = 0;
 
@@ -67,14 +64,7 @@ public class GameLogic extends JFrame {
                         if (obstacle.dead()) {
                             obstacle.reset("", SIZE+(Obstacle.SIZE+50), SIZE - SIZE/3 - Obstacle.SIZE, 30);
                         }
-                        timer.scheduleAtFixedRate(new TimerTask() {
-                            @Override
-                            public void run() {
-                                obstacle.increaseObstacleSpeed();
-                                obstacle.move();
-                            }
-                        }, 0, 5*60*1000);
-                        isGameOver();
+                        obstacle.move();
                     }
                     panel.repaint();
 
@@ -114,23 +104,8 @@ public class GameLogic extends JFrame {
 //        g.fillRect(100,100, 100, 400 );
     }
 
-    public boolean checkCollision(Obstacle obstacle, Player player) {
-
-        int distanceX = Math.abs(player.getX() - obstacle.getX());
-        int distanceY = Math.abs(player.getY() - obstacle.getY());
-        double distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
-
-        return distance < 25 + Obstacle.SIZE;
-    }
-
-
     private void isGameOver() {
-        for (Obstacle obstacle : obstacles) {
-            if (checkCollision(obstacle, player)) {
-                running = false;
-                break;
-            }
-        }
+        // TODO
     }
 
     public static void main(String[] args) {
