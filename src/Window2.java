@@ -113,6 +113,10 @@ public class Window2 extends JFrame implements Observer {
 
         public Gui() {
             setLayout(new FlowLayout());
+            gameOverLabel = new JLabel("GAME OVER");
+            gameOverLabel.setForeground(Color.red);
+            gameOverLabel.setVisible(false);
+            add(gameOverLabel);
             startButton = new JButton("Start");
             startButton.addActionListener(new ActionListener() {
                 @Override
@@ -140,10 +144,6 @@ public class Window2 extends JFrame implements Observer {
             });
             replayButton.setVisible(false);
             add(replayButton);
-            gameOverLabel = new JLabel("GAME OVER");
-            gameOverLabel.setForeground(Color.red);
-            gameOverLabel.setVisible(false);
-            add(gameOverLabel);
             backToMain = new JButton("Back to main");
             backToMain.addActionListener(new ActionListener() {
                 @Override
@@ -177,48 +177,32 @@ public class Window2 extends JFrame implements Observer {
         @Override
         public void keyPressed(KeyEvent e) {
             if (e.getKeyCode() == KeyEvent.VK_UP) {
-                System.out.println("Jump1");
                 player1.state = "jumping";
-//                new JumpingState(player1);
 
             }
             if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                System.out.println("Slide1");
                 player1.state = "sliding";
-//                new SlidingState(player1);
             }
             if (e.getKeyCode() == KeyEvent.VK_W) {
-                System.out.println("Jump2");
                 player2.state = "jumping";
-//                new JumpingState(player2);
 
             }
             if (e.getKeyCode() == KeyEvent.VK_S) {
-                System.out.println("Slide2");
                 player2.state = "sliding";
-//                new SlidingState(player2);
             }
 
         }
         @Override
         public void keyReleased(KeyEvent e) {
             if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                System.out.println("Stop sliding1");
                 player1.state = "stopSliding";
-//                new StopSlidingState(player1);
             }
             if (e.getKeyCode() == KeyEvent.VK_S) {
-                System.out.println("Stop sliding2");
                 player2.state = "stopSliding";
-//                new StopSlidingState(player2);
             }
         }
     }
 
-    public static void main(String[] args) {
-        Window2 window2 = new Window2();
-        window2.setVisible(true);
-    }
 
 }
 

@@ -1,21 +1,18 @@
-import java.awt.*;
 import java.util.*;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import javax.swing.*;
 
 public class GameLogic extends Observable {
 
     public static final int SIZE = 600;
     private List<Obstacle> obstacles = new ArrayList<Obstacle>();
-    private Player player = new Player("a", 390);
+    private Player player = new Player( 370);
     private Thread thread;
     private boolean running;
     private ObstaclesPool obstaclePool =ObstaclesPool.getInstance();
     Timer timer = new Timer();
-
 
     private int score = 0;
 
@@ -56,7 +53,7 @@ public class GameLogic extends Observable {
                             running = false;
                         }
                         if (obstacle.dead()) {
-                            obstacle.reset("", SIZE+(Obstacle.SIZE+500), SIZE - SIZE/3 - Obstacle.SIZE+500, 30,false);
+                            obstacle.reset(SIZE+(Obstacle.SIZE+500), SIZE - SIZE/3 - Obstacle.SIZE+500, 30,false);
                         }
                         timer.scheduleAtFixedRate(new TimerTask() {
                             @Override
@@ -67,7 +64,6 @@ public class GameLogic extends Observable {
                         }, 5, 5*60*1000);
                     }
                     player.move();
-                    // TODO score
                     score++;
                     setChanged();
                     notifyObservers();
@@ -83,7 +79,7 @@ public class GameLogic extends Observable {
         thread.start();
         if (isGameOver()) {
             obstacles.clear();
-            player = new Player("n", 315);
+            player = new Player(315);
         }
 
     }

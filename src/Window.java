@@ -4,11 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.Objects;
 import java.util.Observable;
 import java.util.Observer;
-
-import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 public class Window extends JFrame implements Observer {
 
@@ -73,7 +70,6 @@ public class Window extends JFrame implements Observer {
 
         private void paintPlayer(Graphics g) {
             g.setColor(Color.blue);
-//            g.fillRect(player.getX(), player.getY(), player.WIDTH, player.HEIGHT );
             if (player.slided) {
                 g.drawImage(imgPlayerSlide.getImage(), player.getX(), player.getY(), player.WIDTH, player.HEIGHT, null);
             } else {
@@ -106,6 +102,10 @@ public class Window extends JFrame implements Observer {
 
         public Gui() {
             setLayout(new FlowLayout());
+            gameOverLabel = new JLabel("GAME OVER");
+            gameOverLabel.setForeground(Color.red);
+            gameOverLabel.setVisible(false);
+            add(gameOverLabel);
             scoreLabel = new JLabel("Score: 0");
             add(scoreLabel);
             startButton = new JButton("Start");
@@ -120,10 +120,6 @@ public class Window extends JFrame implements Observer {
                 }
             });
             add(startButton);
-            gameOverLabel = new JLabel("GAME OVER");
-            gameOverLabel.setForeground(Color.red);
-            gameOverLabel.setVisible(false);
-            add(gameOverLabel);
             replayButton = new JButton("Play again");
             replayButton.addActionListener(new ActionListener() {
                 @Override
@@ -162,17 +158,11 @@ public class Window extends JFrame implements Observer {
             scoreLabel.setText("Score: " + score);
         }
 
-
-
         public void showGameOverLabel() {
             gameOverLabel.setVisible(true);
             replayButton.setVisible(true);
             replayButton.setEnabled(true);
 
-        }
-
-        public JButton getStartButton() {
-            return startButton;
         }
 
     }
@@ -181,33 +171,21 @@ public class Window extends JFrame implements Observer {
         @Override
         public void keyPressed(KeyEvent e) {
             if (e.getKeyCode() == KeyEvent.VK_UP) {
-                System.out.println("Jump");
                 player.state = "jumping";
-//                new JumpingState(player);
-
             }
             if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                System.out.println("Slide");
                 player.state = "sliding";
-//                new StopSlidingState(player);
             }
 
         }
         @Override
         public void keyReleased(KeyEvent e) {
             if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                System.out.println("Stop sliding");
                 player.state = "stopSliding";
-//                new StopSlidingState(player);
             }
         }
     }
 
-    public static void main(String[] args) {
-        Window window = new Window();
-        window.setVisible(true);
-
-    }
 
 }
 
