@@ -3,14 +3,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
-
 public class MenuPanel extends JFrame {
     private JLabel title;
     private JButton singleMode;
     private JButton twoPlayerMode;
     private JButton close;
-
     private ImageIcon img = new ImageIcon("images/1-player-bg.png");
     public MenuPanel() {
         setPreferredSize(new Dimension(600, 600));
@@ -78,14 +75,6 @@ public class MenuPanel extends JFrame {
             }
         });
 
-    }
-
-    public JButton getSingleModeButton() {
-        return singleMode;
-    }
-
-    public JButton getTwoPlayerModeButton() {
-        return twoPlayerMode;
     }
 
     public static void main(String[] args) {

@@ -179,24 +179,20 @@ public class Window2 extends JFrame implements Observer {
             if (e.getKeyCode() == KeyEvent.VK_UP) {
                 System.out.println("Jump1");
                 player1.state = "jumping";
-//                new JumpingState(player1);
 
             }
             if (e.getKeyCode() == KeyEvent.VK_DOWN) {
                 System.out.println("Slide1");
                 player1.state = "sliding";
-//                new SlidingState(player1);
             }
             if (e.getKeyCode() == KeyEvent.VK_W) {
                 System.out.println("Jump2");
                 player2.state = "jumping";
-//                new JumpingState(player2);
 
             }
             if (e.getKeyCode() == KeyEvent.VK_S) {
                 System.out.println("Slide2");
                 player2.state = "sliding";
-//                new SlidingState(player2);
             }
 
         }
@@ -205,12 +201,10 @@ public class Window2 extends JFrame implements Observer {
             if (e.getKeyCode() == KeyEvent.VK_DOWN) {
                 System.out.println("Stop sliding1");
                 player1.state = "stopSliding";
-//                new StopSlidingState(player1);
             }
             if (e.getKeyCode() == KeyEvent.VK_S) {
                 System.out.println("Stop sliding2");
                 player2.state = "stopSliding";
-//                new StopSlidingState(player2);
             }
         }
     }

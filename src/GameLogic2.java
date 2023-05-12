@@ -1,5 +1,3 @@
-import javax.swing.*;
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -11,8 +9,8 @@ public class GameLogic2 extends Observable {
 
     public static final int SIZE = 800;
     private List<Obstacle> obstacles = new ArrayList<Obstacle>();
-    private Player player1 = new Player("a", 400);
-    private Player player2 = new Player("b", 140);
+    private Player player1 = new Player( 400);
+    private Player player2 = new Player(140);
     private Thread thread;
     private boolean running;
     public int winner;
@@ -71,7 +69,7 @@ public class GameLogic2 extends Observable {
 
                         }
                         if (obstacle.dead()) {
-                            obstacle.reset("", SIZE+(Obstacle.SIZE+500), SIZE - SIZE/3 - Obstacle.SIZE+500, 30,false);
+                            obstacle.reset(SIZE+(Obstacle.SIZE+500), SIZE - SIZE/3 - Obstacle.SIZE+500, 30,false);
                         }
                         timer.scheduleAtFixedRate(new TimerTask() {
                             @Override

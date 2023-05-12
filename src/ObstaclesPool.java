@@ -10,10 +10,9 @@ public class ObstaclesPool {
 
     public ObstaclesPool() {
         for(int i = 0; i < 1000; i++) {
-            obstacles.add(new Obstacle("obj", 0, 0, 19,false));
+            obstacles.add(new Obstacle(0, 0, 19,false));
         }
     }
-
 
     public Obstacle getObstacle(int x, int y) {
         int obstacleSize = Obstacle.SIZE;
@@ -30,7 +29,7 @@ public class ObstaclesPool {
             isJump=false;
         }
         Obstacle obstacle = obstacles.get(index);
-        obstacle.reset("obj", obstacleX, obstacleY, obstacleSize,isJump);
+        obstacle.reset( obstacleX, obstacleY, obstacleSize,isJump);
         index = (index + 1) % obstacles.size();
         return obstacle;
     }
