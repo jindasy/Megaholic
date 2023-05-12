@@ -41,7 +41,6 @@ public class GameLogic extends Observable {
         running = true;
         score = 0;
         player.initializeState();
-        System.out.println(player.getX());
         thread = new Thread() {
             @Override
             public void run() {
