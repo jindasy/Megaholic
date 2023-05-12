@@ -56,6 +56,7 @@
 //
 //}
 import javax.swing.*;
+import javax.swing.*;
 import java.awt.*;
 
 public class Obstacle {
@@ -72,7 +73,7 @@ public class Obstacle {
 	private int size;
 	private boolean isJump;
 
-
+	private double obstacleSpeed = 1;
 
 	public Obstacle(String name, int x, int y, int size, boolean isJump) {
 		this.name = name;
@@ -89,8 +90,7 @@ public class Obstacle {
 		if (dead()) {
 			return;
 		}
-		x -= vx;
-
+		x -= vx * obstacleSpeed;
 	}
 
 	public int getX() {
@@ -116,7 +116,12 @@ public class Obstacle {
 		this.size = size;
 		this.isJump=isJump;
 	}
-		public Rectangle getBounds() {
+	public Rectangle getBounds() {
 		return new Rectangle((int)x, (int)y, SIZE, SIZE);
 	}
+
+	public void increaseObstacleSpeed() {
+		obstacleSpeed = obstacleSpeed + (0.0005);
+	}
+
 }

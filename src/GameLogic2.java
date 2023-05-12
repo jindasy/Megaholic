@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class GameLogic2 extends Observable {
 
@@ -15,6 +17,7 @@ public class GameLogic2 extends Observable {
     private boolean running;
     public int winner;
     private ObstaclesPool obstaclePool = new ObstaclesPool();
+    Timer timer = new Timer();
 
 
     public GameLogic2() {
@@ -57,7 +60,7 @@ public class GameLogic2 extends Observable {
                 while (running) {
                     for (Obstacle obstacle : obstacles) {
                         if ((player1.getBounds().intersects(obstacle.getBounds()))) {
-                           // game over
+                            // game over
                             running = false;
                             winner = 1;
 
@@ -70,7 +73,13 @@ public class GameLogic2 extends Observable {
                         if (obstacle.dead()) {
                             obstacle.reset("", SIZE+(Obstacle.SIZE+500), SIZE - SIZE/3 - Obstacle.SIZE+500, 30,false);
                         }
-                        obstacle.move();
+                        timer.scheduleAtFixedRate(new TimerTask() {
+                            @Override
+                            public void run() {
+                                obstacle.increaseObstacleSpeed();
+                                obstacle.move();
+                            }
+                        }, 5, 5*60*1000);
                     }
                     player1.move();
                     player2.move();
