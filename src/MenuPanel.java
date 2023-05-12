@@ -21,6 +21,7 @@ public class MenuPanel extends JFrame {
 
         // create components in main
         JLabel imgTitle = new JLabel(new ImageIcon("images/megaholic-title.gif"));
+        JLabel imgMegaman = new JLabel(new ImageIcon("images/megaman.gif"));
         singleMode = new JButton("1-Player");
         twoPlayerMode = new JButton("2-Player");
         close =new JButton("Exit");
@@ -30,8 +31,10 @@ public class MenuPanel extends JFrame {
         imgLabel.add(twoPlayerMode);
         imgLabel.add(close);
         imgLabel.add(imgTitle);
+        imgLabel.add(imgMegaman);
 
         imgTitle.setBounds(100,100,420,100);
+        imgMegaman.setBounds(-130,150,500,500);
         singleMode.setBounds(250,230,100,50);
         twoPlayerMode.setBounds(250,280,100,50);
         close.setBounds(250,330,100,50);
