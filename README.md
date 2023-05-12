@@ -7,6 +7,14 @@ A game application that allows you to have fun with Megaman.
 3. Jindaporn Sookying 6410546106
 4. Nartnatta Krivichian 6410545509
 
+## How To Run
+1. Download the ZIP file provided or from the following GitHub repository:
+   https://github.com/jindasy/Megaholic.git
+
+2. Open the downloaded folder in IntelliJ IDEA
+3. Setup SDK
+4. Run the game from ```MenuPanel``` file.
+
 
 ## How To Play
 There are 2 modes that you can choose.
@@ -23,8 +31,9 @@ While the Megaman is running, you can choose to jump over or slide under the obs
 There's only one rule. Don't collide with the obstacles!!!
 ```
 
-## How To Run
-1. Download the ZIP file provided.
-2. Open the downloaded folder in IntelliJ IDEA
-3. Setup SDK if you need to
-4. Run the game from ```MenuPanel``` file.
+## Design patterns used
+1. **Object pool pattern** is used to generate Obstacle from ObstaclesPool.
+2. **Singleton pattern** is used to get the instance of ObstaclesPool to make sure that it is created only once.
+3. **State pattern** is used to change the behaviour of Player according to its state (e.g. jumping, and sliding)
+4. **Observer pattern** allows OnePlayerModeLogic to notify any changes to OnePlayerModeUI as well as allows 
+TwoPlayerModeLogic to notify any changes to TwoPlayerModeUI so that they updates accordingly.  
