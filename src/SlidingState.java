@@ -1,29 +1,22 @@
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-public class SlidingState implements PlayerState, ActionListener {
+public class SlidingState extends PlayerState {
     private Player player;
 
     public SlidingState(Player player) {
+        super(player);
         this.player = player;
-        this.action();
-
-        Timer timer = new Timer(10, this);
-        timer.start();
-    }
-    @Override
-    public void action() {
-        System.out.println("SLIDE");
-        int height = player.getHeight();
-        int width = player.getWidth();
-        player.setY((height-width)+player.getY());
-        player.setWidth(height);
-        player.setHeight(width);
+//        player.setState("sliding");
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
 
+    public void move() {
+        if (!player.slided) {
+            System.out.println("1");
+            int H = player.getHEIGHT();
+            player.setHEIGHT(player.getWIDTH());
+            player.setWIDTH(H);
+            int y = player.getY() - (player.getHEIGHT() - player.getWIDTH());
+            player.setY(y);
+            player.setSlided(true);
+        }
     }
 }

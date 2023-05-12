@@ -1,41 +1,38 @@
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.util.Objects;
 
-public class JumpingState implements PlayerState, ActionListener {
+public class JumpingState extends PlayerState{
     private Player player;
     public JumpingState(Player player) {
+        super(player);
         this.player = player;
-        this.action();
-
-        Timer timer = new Timer(10, this);
-        timer.start();
+//        player.setState("jumping");
     }
 
-    @Override
-    public void action() {
-        System.out.println("JUMP");
 
-        if (player.getY() == 300) { // check if player is on the ground
-//            System.out.println("OnGround");
-            player.setVelocityY(-10);
-        }
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        player.setY(player.getY() + player.getVelocityY());
-//        System.out.println(player.getPlayerY());
-        if (player.getY() < 300) {
-//            System.out.println("Up");
-            player.setVelocityY(player.getVelocityY() + 1);
-//            System.out.println(player.getPlayerY());
-
-        }
-        else if (player.getY() > 300) {
-//            System.out.println("Down");
-            player.setY(300);
-            player.setVelocityY(0);
-        }
+    public void move() {
+//        if (Objects.equals(player.state, "jumping")) {
+            if (player.jumped && player.getY() == player.getStart_y()) {
+                player.setState("Normal");
+                player.setJumped(false);
+            } else {
+                System.out.println("x");
+                int y = player.getY();
+                double vy = player.getVy();
+                if (y == player.getStart_y()) {
+                    vy = -18;
+                }
+                y += vy;
+                if (y < player.getStart_y()) {
+                    vy++;
+                }
+                if (y > player.getStart_y()) {
+                    y = player.getStart_y();
+                    vy = 0;
+                }
+                player.setY(y);
+                player.setVy(vy);
+                player.setJumped(true);
+            }
+//        }
     }
 }
