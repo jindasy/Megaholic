@@ -3,13 +3,11 @@ import java.util.Objects;
 
 public class Player{
 
-    public static final int MAX_HEALTH = 20;
     public static final float MAX_V = 1.0f;
     public int WIDTH = 50;
     public int HEIGHT = 150;
     private final int start_y;
     private String name;
-    private int hp;
     private int x, y;
     private double vx, vy;
     private double ax, ay;
@@ -17,9 +15,10 @@ public class Player{
     public Boolean jumped = false;
     public Boolean slided = false;
 
+    private PlayerState playerState;
+
     public Player(String name, int start_y) {
         this.name = name;
-        this.hp = 30;
         this.x = 100;
         this.start_y = start_y;
         this.y = start_y;
@@ -27,48 +26,11 @@ public class Player{
         this.vy = 2;
         this.ax = 0;
         this.ay = 9.8;
-
-
+        this.playerState = new PlayerState(this);
     }
 
     public void move() {
-        if (Objects.equals(state, "jumping")) {
-            if (jumped && y == start_y) {
-                state = "Normal";
-                jumped = false;
-            }
-            else {
-                if (y == start_y) {
-                    vy = -30;
-                }
-                y += vy;
-                if (y < start_y) {
-                    vy++;
-                }
-                if (y > start_y) {
-                    y = start_y;
-                    vy = 0;
-                }
-                jumped = true;
-            }
-        }
-        if (Objects.equals(state, "sliding") && !slided) {
-            int H = HEIGHT;
-            HEIGHT = WIDTH;
-            WIDTH = H;
-            y = y - (HEIGHT - WIDTH);
-            slided = true;
-
-        }
-        if (Objects.equals(state, "stopSliding")) {
-            int H = HEIGHT;
-            HEIGHT = WIDTH;
-            WIDTH = H;
-            state = "Normal";
-            slided = false;
-            y = start_y;
-        }
-
+        playerState.move();
     }
 
     public int getX() {
@@ -79,8 +41,48 @@ public class Player{
         return (int) y;
     }
 
-    public boolean dead() {
-        return x <= 0;
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public void setVy(double vy) {
+        this.vy = vy;
+    }
+
+    public int getStart_y() {
+        return start_y;
+    }
+
+    public double getVy() {
+        return vy;
+    }
+
+    public int getHEIGHT() {
+        return HEIGHT;
+    }
+
+    public int getWIDTH() {
+        return WIDTH;
+    }
+
+    public void setHEIGHT(int HEIGHT) {
+        this.HEIGHT = HEIGHT;
+    }
+
+    public void setWIDTH(int WIDTH) {
+        this.WIDTH = WIDTH;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public void setJumped(Boolean jumped) {
+        this.jumped = jumped;
+    }
+
+    public void setSlided(Boolean slided) {
+        this.slided = slided;
     }
 
     public void initializeState() {
