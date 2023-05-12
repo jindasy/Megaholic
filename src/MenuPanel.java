@@ -52,7 +52,7 @@ public class MenuPanel extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                JFrame frame = new Window();
+                JFrame frame = new OnePlayerModeUI();
                 frame.setVisible(true);
                 currentFrame.dispose();
 
@@ -63,7 +63,7 @@ public class MenuPanel extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                JFrame frame = new Window2();
+                JFrame frame = new TwoPlayerModeUI();
                 frame.setVisible(true);
                 currentFrame.dispose();
 

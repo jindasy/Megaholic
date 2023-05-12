@@ -5,7 +5,7 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class GameLogic2 extends Observable {
+public class TwoPlayerModeLogic extends Observable {
 
     public static final int SIZE = 800;
     private List<Obstacle> obstacles = new ArrayList<Obstacle>();
@@ -18,7 +18,7 @@ public class GameLogic2 extends Observable {
     Timer timer = new Timer();
 
 
-    public GameLogic2() {
+    public TwoPlayerModeLogic() {
         obstacles.clear();
         int obstacle_size = 30;
         int start_x = SIZE;

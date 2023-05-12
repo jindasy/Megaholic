@@ -4,7 +4,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 
-public class GameLogic extends Observable {
+public class OnePlayerModeLogic extends Observable {
 
     public static final int SIZE = 600;
     private List<Obstacle> obstacles = new ArrayList<Obstacle>();
@@ -16,7 +16,7 @@ public class GameLogic extends Observable {
 
     private int score = 0;
 
-    public GameLogic() {
+    public OnePlayerModeLogic() {
         score = 0;
         obstacles.clear();
 

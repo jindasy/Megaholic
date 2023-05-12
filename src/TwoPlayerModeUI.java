@@ -7,24 +7,24 @@ import java.awt.event.KeyEvent;
 import java.util.Observable;
 import java.util.Observer;
 
-public class Window extends JFrame implements Observer {
+public class TwoPlayerModeUI extends JFrame implements Observer {
 
     private int size = 600;
-    private GameLogic gameLogic = new GameLogic();
+    private TwoPlayerModeLogic gameLogic = new TwoPlayerModeLogic();
     private Renderer renderer;
     private Gui gui;
-    Player player = gameLogic.getPlayer();
-    ImageIcon img = new ImageIcon("images/1-player-bg.png");
+    Player player1 = gameLogic.getPlayer1();
+    Player player2 = gameLogic.getPlayer2();
+
+    ImageIcon img = new ImageIcon("images/2-player-bg.png");
+    Image imageObstacle;
+    Image imageObstacle2;
+    JFrame parent = this;
     ImageIcon imgPlayer = new ImageIcon("images/magman-run.gif");
     ImageIcon imgPlayerSlide = new ImageIcon("images/magman-slide.gif");
 
 
-    private JFrame parent = this;
-    ImageIcon imageObstacle;
-    ImageIcon imageObstacle2;
-
-
-    public Window() {
+    public TwoPlayerModeUI() {
         super();
         addKeyListener(new Controller());
         setLayout(new BorderLayout());
@@ -36,19 +36,24 @@ public class Window extends JFrame implements Observer {
         setSize(size, size);
         setAlwaysOnTop(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        imageObstacle = new ImageIcon("images/obs1.png");
-        imageObstacle2 = new ImageIcon("images/obs2.png");
+        imageObstacle = new ImageIcon("images/obs1.png").getImage();
+        imageObstacle2 = new ImageIcon("images/obs2.png").getImage();
     }
 
     @Override
     public void update(Observable o, Object arg) {
         renderer.repaint();
-        gui.updateScore(gameLogic.getScore());
 
         if (gameLogic.isGameOver()){
-            gui.showGameOverLabel();
+            String message;
+            if (gameLogic.winner == 1) {
+                message = "Player 1 wins!";
+            }
+            else {
+                message = "Player 2 wins!";
+            }
+            gui.showGameOverLabel(message);
         }
-
     }
 
 
@@ -64,17 +69,23 @@ public class Window extends JFrame implements Observer {
             g.drawImage(img.getImage(), 0,0, null);
             paintObstacles(g);
             paintPlayer(g);
-
         }
-
 
         private void paintPlayer(Graphics g) {
             g.setColor(Color.blue);
-            if (player.slided) {
-                g.drawImage(imgPlayerSlide.getImage(), player.getX(), player.getY(), player.WIDTH, player.HEIGHT, null);
+            if (player1.slided) {
+                g.drawImage(imgPlayerSlide.getImage(), player1.getX(), player1.getY(), player1.WIDTH, player1.HEIGHT, null);
+
             } else {
-                g.drawImage(imgPlayer.getImage(), player.getX(), player.getY(), player.WIDTH, player.HEIGHT, null);
+                g.drawImage(imgPlayer.getImage(), player1.getX(), player1.getY(), player1.WIDTH, player1.HEIGHT, null);
             }
+            g.drawString("Player 1", player1.getX(), player1.getY()-10);
+            if (player2.slided) {
+                g.drawImage(imgPlayerSlide.getImage(), player2.getX(), player2.getY(), player2.WIDTH, player2.HEIGHT, null);
+            } else {
+                g.drawImage(imgPlayer.getImage(), player2.getX(), player2.getY(), player2.WIDTH, player2.HEIGHT, null);
+            }
+            g.drawString("Player 2", player2.getX(), player2.getY()-10);
         }
 
         private void paintObstacles(Graphics g) {
@@ -84,9 +95,9 @@ public class Window extends JFrame implements Observer {
                     continue;
                 }
                 if (e.isJumping()) {
-                    g.drawImage(imageObstacle2.getImage(),e.getX(), e.getY(), 60, 60, null, null);
+                    g.drawImage(imageObstacle2,e.getX(), e.getY(), 60, 60, null, null);
                 } else {
-                    g.drawImage(imageObstacle.getImage(),e.getX(), e.getY(), 60, 60, null, null);
+                    g.drawImage(imageObstacle,e.getX(), e.getY(), 60, 60, null, null);
                 }
             }
         }
@@ -94,10 +105,10 @@ public class Window extends JFrame implements Observer {
 
     class Gui extends JPanel {
 
-        private JLabel scoreLabel;
         private JButton startButton;
         private JButton replayButton;
         private JLabel gameOverLabel;
+
         private JButton backToMain;
 
         public Gui() {
@@ -106,15 +117,13 @@ public class Window extends JFrame implements Observer {
             gameOverLabel.setForeground(Color.red);
             gameOverLabel.setVisible(false);
             add(gameOverLabel);
-            scoreLabel = new JLabel("Score: 0");
-            add(scoreLabel);
             startButton = new JButton("Start");
             startButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     gameLogic.start();
                     startButton.setEnabled(false);
-                    Window.this.requestFocus();
+                    TwoPlayerModeUI.this.requestFocus();
                     startButton.setVisible(false);
                     replayButton.setVisible(false);
                 }
@@ -124,7 +133,7 @@ public class Window extends JFrame implements Observer {
             replayButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    JFrame frame = new Window();
+                    JFrame frame = new TwoPlayerModeUI();
                     frame.setVisible(true);
                     parent.dispose();
                     startButton.setEnabled(false);
@@ -135,8 +144,6 @@ public class Window extends JFrame implements Observer {
             });
             replayButton.setVisible(false);
             add(replayButton);
-
-
             backToMain = new JButton("Back to main");
             backToMain.addActionListener(new ActionListener() {
                 @Override
@@ -154,12 +161,10 @@ public class Window extends JFrame implements Observer {
             add(backToMain);
         }
 
-        public void updateScore(int score) {
-            scoreLabel.setText("Score: " + score);
-        }
 
-        public void showGameOverLabel() {
+        public void showGameOverLabel(String message) {
             gameOverLabel.setVisible(true);
+            gameOverLabel.setText(message);
             replayButton.setVisible(true);
             replayButton.setEnabled(true);
 
@@ -168,20 +173,32 @@ public class Window extends JFrame implements Observer {
     }
 
     class Controller extends KeyAdapter {
+
         @Override
         public void keyPressed(KeyEvent e) {
             if (e.getKeyCode() == KeyEvent.VK_UP) {
-                player.state = "jumping";
+                player1.state = "jumping";
+
             }
             if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                player.state = "sliding";
+                player1.state = "sliding";
+            }
+            if (e.getKeyCode() == KeyEvent.VK_W) {
+                player2.state = "jumping";
+
+            }
+            if (e.getKeyCode() == KeyEvent.VK_S) {
+                player2.state = "sliding";
             }
 
         }
         @Override
         public void keyReleased(KeyEvent e) {
             if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                player.state = "stopSliding";
+                player1.state = "stopSliding";
+            }
+            if (e.getKeyCode() == KeyEvent.VK_S) {
+                player2.state = "stopSliding";
             }
         }
     }
