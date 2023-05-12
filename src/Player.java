@@ -1,31 +1,23 @@
 import java.awt.*;
-import java.util.Objects;
 
 public class Player{
 
-    public static final float MAX_V = 1.0f;
     public int WIDTH = 50;
     public int HEIGHT = 100;
     private final int start_y;
-    private String name;
     private int x, y;
-    private double vx, vy;
-    private double ax, ay;
+    private double vy;
     public String state;
     public Boolean jumped = false;
     public Boolean slided = false;
 
     private PlayerState playerState;
 
-    public Player(String name, int start_y) {
-        this.name = name;
+    public Player(int start_y) {
         this.x = 100;
         this.start_y = start_y;
         this.y = start_y;
-        this.vx = 2;
         this.vy = 2;
-        this.ax = 0;
-        this.ay = 9.8;
         this.playerState = new PlayerState(this);
     }
 
