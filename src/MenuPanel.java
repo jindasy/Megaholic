@@ -9,6 +9,7 @@ public class MenuPanel extends JFrame {
     private JButton twoPlayerMode;
     private JButton close;
     private ImageIcon img = new ImageIcon("images/1-player-bg.png");
+
     public MenuPanel() {
         setPreferredSize(new Dimension(600, 600));
         setLayout(null);
@@ -18,7 +19,7 @@ public class MenuPanel extends JFrame {
         imgLabel.setVisible(true);
         add(imgLabel);
         imgLabel.setBounds(0,0,img.getIconWidth(),img.getIconHeight());
-
+        JLabel imgTitle = new JLabel(new ImageIcon("images/megaholic-title.gif"));
 
         // create components in main
         title = new JLabel("Megaholic");
@@ -27,12 +28,15 @@ public class MenuPanel extends JFrame {
         close =new JButton("Exit");
 
         // add components to panel
-        imgLabel.add(title);
+//        imgLabel.add(title);
         imgLabel.add(singleMode);
         imgLabel.add(twoPlayerMode);
         imgLabel.add(close);
+        imgLabel.add(imgTitle);
+
 
         title.setBounds(190,100,700,100);
+        imgTitle.setBounds(100,100,420,100);
         singleMode.setBounds(250,230,100,50);
         twoPlayerMode.setBounds(250,280,100,50);
         close.setBounds(250,330,100,50);
