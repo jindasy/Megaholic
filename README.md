@@ -13,11 +13,11 @@ There are 2 modes that you can choose.
 - 1-Player mode: Play on your own to get the highest score
 - 2-Player mode: Have fun with your friends on the same computer to beat each other
 
-You can choose to jump over or slide under the obstacle.
+While the Megaman is running, you can choose to jump over or slide under the obstacles.
 - 1-Player mode: Press UP Key to jump and DOWN key to slide
 - 2-Player mode: 
   - Press UP Key to jump and DOWN key to slide for Player 1 (at the bottom)
-  - Press W Key to jump and S key to slide for Player 1 (at the top)
+  - Press W Key to jump and S key to slide for Player 2 (at the top)
 
 ```
 There's only one rule. Don't collide with the obstacles!!!
