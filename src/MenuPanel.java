@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MenuPanel extends JFrame {
-    private JLabel title;
     private JButton singleMode;
     private JButton twoPlayerMode;
     private JButton close;
@@ -19,30 +18,25 @@ public class MenuPanel extends JFrame {
         imgLabel.setVisible(true);
         add(imgLabel);
         imgLabel.setBounds(0,0,img.getIconWidth(),img.getIconHeight());
-        JLabel imgTitle = new JLabel(new ImageIcon("images/megaholic-title.gif"));
 
         // create components in main
-        title = new JLabel("Megaholic");
+        JLabel imgTitle = new JLabel(new ImageIcon("images/megaholic-title.gif"));
         singleMode = new JButton("1-Player");
         twoPlayerMode = new JButton("2-Player");
         close =new JButton("Exit");
 
         // add components to panel
-//        imgLabel.add(title);
         imgLabel.add(singleMode);
         imgLabel.add(twoPlayerMode);
         imgLabel.add(close);
         imgLabel.add(imgTitle);
 
-
-        title.setBounds(190,100,700,100);
         imgTitle.setBounds(100,100,420,100);
         singleMode.setBounds(250,230,100,50);
         twoPlayerMode.setBounds(250,280,100,50);
         close.setBounds(250,330,100,50);
 
         // Change text format
-        title.setFont(new Font("Verdana", Font.BOLD, 40));
         singleMode.setFont(new Font("Verdana", Font.PLAIN, 20));
         twoPlayerMode.setFont(new Font("Verdana", Font.PLAIN, 20));
         close.setFont(new Font("Verdana", Font.PLAIN, 20));
@@ -51,34 +45,27 @@ public class MenuPanel extends JFrame {
         singleMode.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 JFrame frame = new Window();
                 frame.setVisible(true);
                 currentFrame.dispose();
-
             }
         });
 
         twoPlayerMode.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 JFrame frame = new Window2();
                 frame.setVisible(true);
                 currentFrame.dispose();
-
             }
         });
 
         close.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 currentFrame.dispose();
-
             }
         });
-
     }
 
     public static void main(String[] args) {
@@ -88,8 +75,5 @@ public class MenuPanel extends JFrame {
         menu.setAlwaysOnTop(true);
         menu.setSize(600, 600);
         menu.setDefaultCloseOperation(EXIT_ON_CLOSE);
-
     }
-
-
 }

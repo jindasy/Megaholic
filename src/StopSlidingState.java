@@ -3,7 +3,6 @@ public class StopSlidingState extends PlayerState{
     public StopSlidingState(Player player) {
         super(player);
         this.player = player;
-//        player.setState("stopSliding");
     }
 
     public void move() {

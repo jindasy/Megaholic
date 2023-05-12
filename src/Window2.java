@@ -15,11 +15,10 @@ public class Window2 extends JFrame implements Observer {
     private Gui gui;
     Player player1 = gameLogic.getPlayer1();
     Player player2 = gameLogic.getPlayer2();
-
-    ImageIcon img = new ImageIcon("images/2-player-bg.png");
     Image imageObstacle;
     Image imageObstacle2;
     JFrame parent = this;
+    ImageIcon img = new ImageIcon("images/2-player-bg.png");
     ImageIcon imgPlayer = new ImageIcon("images/magman-run.gif");
     ImageIcon imgPlayerSlide = new ImageIcon("images/magman-slide.gif");
 
@@ -75,11 +74,11 @@ public class Window2 extends JFrame implements Observer {
             g.setColor(Color.blue);
             if (player1.slided) {
                 g.drawImage(imgPlayerSlide.getImage(), player1.getX(), player1.getY(), player1.WIDTH, player1.HEIGHT, null);
-
             } else {
                 g.drawImage(imgPlayer.getImage(), player1.getX(), player1.getY(), player1.WIDTH, player1.HEIGHT, null);
             }
             g.drawString("Player 1", player1.getX(), player1.getY()-10);
+
             if (player2.slided) {
                 g.drawImage(imgPlayerSlide.getImage(), player2.getX(), player2.getY(), player2.WIDTH, player2.HEIGHT, null);
             } else {
@@ -108,7 +107,6 @@ public class Window2 extends JFrame implements Observer {
         private JButton startButton;
         private JButton replayButton;
         private JLabel gameOverLabel;
-
         private JButton backToMain;
 
         public Gui() {
@@ -161,15 +159,12 @@ public class Window2 extends JFrame implements Observer {
             add(backToMain);
         }
 
-
         public void showGameOverLabel(String message) {
             gameOverLabel.setVisible(true);
             gameOverLabel.setText(message);
             replayButton.setVisible(true);
             replayButton.setEnabled(true);
-
         }
-
     }
 
     class Controller extends KeyAdapter {
@@ -178,19 +173,16 @@ public class Window2 extends JFrame implements Observer {
         public void keyPressed(KeyEvent e) {
             if (e.getKeyCode() == KeyEvent.VK_UP) {
                 player1.state = "jumping";
-
             }
             if (e.getKeyCode() == KeyEvent.VK_DOWN) {
                 player1.state = "sliding";
             }
             if (e.getKeyCode() == KeyEvent.VK_W) {
                 player2.state = "jumping";
-
             }
             if (e.getKeyCode() == KeyEvent.VK_S) {
                 player2.state = "sliding";
             }
-
         }
         @Override
         public void keyReleased(KeyEvent e) {
@@ -202,7 +194,5 @@ public class Window2 extends JFrame implements Observer {
             }
         }
     }
-
-
 }
 

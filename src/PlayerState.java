@@ -6,13 +6,12 @@ public class PlayerState {
 
     public PlayerState(Player player) {
         this.player = player;
-
     }
 
     public void move() {
         if (Objects.equals(player.state, "jumping")) {
             new JumpingState(player).move();
-            }
+        }
 
         if (Objects.equals(player.state, "sliding")) {
             new SlidingState(player).move();

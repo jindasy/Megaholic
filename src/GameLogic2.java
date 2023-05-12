@@ -43,7 +43,6 @@ public class GameLogic2 extends Observable {
                 start_x += obstacle_size * 6;
             }
         }
-
     }
 
 
