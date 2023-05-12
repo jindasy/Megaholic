@@ -10,7 +10,7 @@ public class GameLogic extends Observable {
 
     public static final int SIZE = 600;
     private List<Obstacle> obstacles = new ArrayList<Obstacle>();
-    private Player player = new Player("a", 320);
+    private Player player = new Player("a", 390);
     private Thread thread;
     private boolean running;
     private ObstaclesPool obstaclePool = new ObstaclesPool();

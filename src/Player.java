@@ -6,7 +6,7 @@ public class Player{
     public static final int MAX_HEALTH = 20;
     public static final float MAX_V = 1.0f;
     public int WIDTH = 50;
-    public int HEIGHT = 150;
+    public int HEIGHT = 100;
     private final int start_y;
     private String name;
     private int hp;
@@ -39,7 +39,7 @@ public class Player{
             }
             else {
                 if (y == start_y) {
-                    vy = -30;
+                    vy = -20;
                 }
                 y += vy;
                 if (y < start_y) {

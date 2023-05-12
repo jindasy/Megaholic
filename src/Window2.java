@@ -86,9 +86,9 @@ public class Window2 extends JFrame implements Observer {
                     continue;
                 }
                 if (e.isJumping()) {
-                    g.drawImage(imageObstacle2,e.getX(), e.getY(), 80, 80, null, null);
+                    g.drawImage(imageObstacle2,e.getX(), e.getY(), 60, 60, null, null);
                 } else {
-                    g.drawImage(imageObstacle,e.getX(), e.getY(), 80, 80, null, null);
+                    g.drawImage(imageObstacle,e.getX(), e.getY(), 60, 60, null, null);
                 }
             }
         }

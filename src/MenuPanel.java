@@ -20,7 +20,7 @@ public class MenuPanel extends JFrame {
         JLabel imgLabel = new JLabel(new ImageIcon("images/main-bg.png"));
         imgLabel.setVisible(true);
         add(imgLabel);
-        imgLabel.setBounds(0,0,600,600);
+        imgLabel.setBounds(0,0,img.getIconWidth(),img.getIconHeight());
 
 
         // create components in main

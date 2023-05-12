@@ -19,8 +19,8 @@ public class Window extends JFrame implements Observer {
     ImageIcon img = new ImageIcon("images/1-player-bg.png");
 
     private JFrame parent = this;
-    Image imageObstacle;
-    Image imageObstacle2;
+    ImageIcon imageObstacle;
+    ImageIcon imageObstacle2;
 
 
     public Window() {
@@ -35,8 +35,8 @@ public class Window extends JFrame implements Observer {
         setSize(size, size);
         setAlwaysOnTop(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        imageObstacle = new ImageIcon("images/obs2.png").getImage();
-        imageObstacle2 = new ImageIcon("images/obs2.png").getImage();
+        imageObstacle = new ImageIcon("images/obs1.png");
+        imageObstacle2 = new ImageIcon("images/obs2.png");
     }
 
     @Override
@@ -79,9 +79,9 @@ public class Window extends JFrame implements Observer {
                     continue;
                 }
                 if (e.isJumping()) {
-                    g.drawImage(imageObstacle2,e.getX(), e.getY(), 80, 80, null, null);
+                    g.drawImage(imageObstacle2.getImage(),e.getX(), e.getY(), 60, 60, null, null);
                 } else {
-                    g.drawImage(imageObstacle,e.getX(), e.getY(), 80, 80, null, null);
+                    g.drawImage(imageObstacle.getImage(),e.getX(), e.getY(), 60, 60, null, null);
                 }
             }
         }
