@@ -18,6 +18,8 @@ public class Window2 extends JFrame implements Observer {
 
     ImageIcon img = new ImageIcon("images/2-player-bg.png");
 
+    JFrame parent = this;
+
 
     public Window2() {
         super();
@@ -84,10 +86,11 @@ public class Window2 extends JFrame implements Observer {
 
     class Gui extends JPanel {
 
-        private JLabel tickLabel;
         private JButton startButton;
         private JButton replayButton;
         private JLabel gameOverLabel;
+
+        private JButton backToMain;
 
         public Gui() {
             setLayout(new FlowLayout());
@@ -107,11 +110,11 @@ public class Window2 extends JFrame implements Observer {
             replayButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    gameLogic.start();
                     JFrame frame = new Window2();
                     frame.setVisible(true);
-                    frame.dispose();
+                    parent.dispose();
                     startButton.setEnabled(false);
+                    startButton.setEnabled(true);
                     gameOverLabel.setVisible(false);
                     replayButton.setVisible(false);
                 }
@@ -122,8 +125,22 @@ public class Window2 extends JFrame implements Observer {
             gameOverLabel.setForeground(Color.red);
             gameOverLabel.setVisible(false);
             add(gameOverLabel);
+            backToMain = new JButton("Back to main");
+            backToMain.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    JFrame frame = new MenuPanel();
+                    frame.setVisible(true);
+                    frame.setSize(new Dimension(600, 600));
+                    parent.dispose();
+                    startButton.setEnabled(false);
+                    gameOverLabel.setVisible(false);
+                    replayButton.setVisible(false);
+                }
+            });
+            backToMain.setVisible(true);
+            add(backToMain);
         }
-
 
 
         public void showGameOverLabel(String message) {
