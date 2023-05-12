@@ -203,10 +203,6 @@ public class Window2 extends JFrame implements Observer {
         }
     }
 
-    public static void main(String[] args) {
-        Window2 window2 = new Window2();
-        window2.setVisible(true);
-    }
 
 }
 

@@ -186,11 +186,6 @@ public class Window extends JFrame implements Observer {
         }
     }
 
-    public static void main(String[] args) {
-        Window window = new Window();
-        window.setVisible(true);
-
-    }
 
 }
 
