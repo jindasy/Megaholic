@@ -11,7 +11,6 @@ public class JumpingState extends PlayerState{
             player.setState("Normal");
             player.setJumped(false);
         } else {
-            System.out.println("x");
             int y = player.getY();
             double vy = player.getVy();
             if (y == player.getStart_y()) {

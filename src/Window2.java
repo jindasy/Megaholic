@@ -113,6 +113,10 @@ public class Window2 extends JFrame implements Observer {
 
         public Gui() {
             setLayout(new FlowLayout());
+            gameOverLabel = new JLabel("GAME OVER");
+            gameOverLabel.setForeground(Color.red);
+            gameOverLabel.setVisible(false);
+            add(gameOverLabel);
             startButton = new JButton("Start");
             startButton.addActionListener(new ActionListener() {
                 @Override
@@ -140,10 +144,6 @@ public class Window2 extends JFrame implements Observer {
             });
             replayButton.setVisible(false);
             add(replayButton);
-            gameOverLabel = new JLabel("GAME OVER");
-            gameOverLabel.setForeground(Color.red);
-            gameOverLabel.setVisible(false);
-            add(gameOverLabel);
             backToMain = new JButton("Back to main");
             backToMain.addActionListener(new ActionListener() {
                 @Override

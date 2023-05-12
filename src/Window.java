@@ -102,6 +102,10 @@ public class Window extends JFrame implements Observer {
 
         public Gui() {
             setLayout(new FlowLayout());
+            gameOverLabel = new JLabel("GAME OVER");
+            gameOverLabel.setForeground(Color.red);
+            gameOverLabel.setVisible(false);
+            add(gameOverLabel);
             scoreLabel = new JLabel("Score: 0");
             add(scoreLabel);
             startButton = new JButton("Start");
@@ -116,10 +120,6 @@ public class Window extends JFrame implements Observer {
                 }
             });
             add(startButton);
-            gameOverLabel = new JLabel("GAME OVER");
-            gameOverLabel.setForeground(Color.red);
-            gameOverLabel.setVisible(false);
-            add(gameOverLabel);
             replayButton = new JButton("Play again");
             replayButton.addActionListener(new ActionListener() {
                 @Override
@@ -171,11 +171,9 @@ public class Window extends JFrame implements Observer {
         @Override
         public void keyPressed(KeyEvent e) {
             if (e.getKeyCode() == KeyEvent.VK_UP) {
-                System.out.println("Jump");
                 player.state = "jumping";
             }
             if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                System.out.println("Slide");
                 player.state = "sliding";
             }
 
@@ -183,7 +181,6 @@ public class Window extends JFrame implements Observer {
         @Override
         public void keyReleased(KeyEvent e) {
             if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                System.out.println("Stop sliding");
                 player.state = "stopSliding";
             }
         }
