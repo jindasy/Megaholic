@@ -177,21 +177,17 @@ public class Window2 extends JFrame implements Observer {
         @Override
         public void keyPressed(KeyEvent e) {
             if (e.getKeyCode() == KeyEvent.VK_UP) {
-                System.out.println("Jump1");
                 player1.state = "jumping";
 
             }
             if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                System.out.println("Slide1");
                 player1.state = "sliding";
             }
             if (e.getKeyCode() == KeyEvent.VK_W) {
-                System.out.println("Jump2");
                 player2.state = "jumping";
 
             }
             if (e.getKeyCode() == KeyEvent.VK_S) {
-                System.out.println("Slide2");
                 player2.state = "sliding";
             }
 
@@ -199,11 +195,9 @@ public class Window2 extends JFrame implements Observer {
         @Override
         public void keyReleased(KeyEvent e) {
             if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                System.out.println("Stop sliding1");
                 player1.state = "stopSliding";
             }
             if (e.getKeyCode() == KeyEvent.VK_S) {
-                System.out.println("Stop sliding2");
                 player2.state = "stopSliding";
             }
         }
