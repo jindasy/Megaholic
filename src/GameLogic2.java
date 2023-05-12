@@ -1,38 +1,37 @@
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
-import javax.swing.*;
+public class GameLogic2 extends Observable {
 
-public class GameLogic extends Observable {
-
-    public static final int SIZE = 600;
+    public static final int SIZE = 800;
     private List<Obstacle> obstacles = new ArrayList<Obstacle>();
-    private Player player = new Player("a", 320);
+    private Player player1 = new Player("a", 390);
+    private Player player2 = new Player("b", 110);
     private Thread thread;
     private boolean running;
+    public int winner;
 
-    private int score = 0;
 
-    public GameLogic() {
-        score = 0;
+    public GameLogic2() {
         // TODO use object pool
+
     }
+
 
     public void start() {
         running = true;
-        score = 0;
         obstacles.clear();
-        player.initializeState();
-        System.out.println(player.getX());
+        player1.initializeState();
+        player2.initializeState();
         int obstacle_size = 30;
         int start_x = SIZE;
-        int start_y = SIZE - SIZE/2 - obstacle_size;
         for (int i = 0; i < 8; i++) {
-            Obstacle obstacle = new Obstacle("Obs" + (i + 1), start_x, start_y, obstacle_size);
-            start_x += 2* Obstacle.SIZE + 50;
-            obstacles.add(obstacle);
+            Obstacle obstacle1 = new Obstacle("Obs" + (i + 1), start_x, 200, obstacle_size);
+            Obstacle obstacle2 = new Obstacle("Obs" + (i + 1), start_x, 350, obstacle_size);
+            start_x += 2* Obstacle.SIZE + 100;
+            obstacles.add(obstacle1);
+            obstacles.add(obstacle2);
         }
 
 
@@ -43,18 +42,25 @@ public class GameLogic extends Observable {
                 super.run();
                 while (running) {
                     for (Obstacle obstacle : obstacles) {
-                        if ((player.getBounds().intersects(obstacle.getBounds()))) {
+                        if ((player1.getBounds().intersects(obstacle.getBounds()))) {
+                           // game over
+                            running = false;
+                            winner = 1;
+
+                        } else if ((player2.getBounds().intersects(obstacle.getBounds()))) {
                             // game over
                             running = false;
+                            winner = 2;
+
                         }
                         if (obstacle.dead()) {
                             obstacle.reset("", SIZE+(Obstacle.SIZE+50), SIZE - SIZE/3 - Obstacle.SIZE, 30);
                         }
                         obstacle.move();
                     }
-                    player.move();
+                    player1.move();
+                    player2.move();
                     // TODO score
-                    score++;
                     setChanged();
                     notifyObservers();
 
@@ -67,24 +73,19 @@ public class GameLogic extends Observable {
             }
         };
         thread.start();
-        if (isGameOver()) {
-            obstacles.clear();
-            player = new Player("n", 315);
-        }
 
-    }
-
-    public int getScore() {
-        return score;
     }
 
     public boolean isGameOver() {
         return !running;
     }
 
+    public Player getPlayer1() {
+        return player1;
+    }
 
-    public Player getPlayer() {
-        return player;
+    public Player getPlayer2() {
+        return player2;
     }
 
     public List<Obstacle> getObstacle() {

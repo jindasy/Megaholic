@@ -1,79 +1,98 @@
-import javax.swing.*;
 import java.awt.*;
+import java.util.Objects;
+
+public class Player{
+
+    public static final int MAX_HEALTH = 20;
+    public static final float MAX_V = 1.0f;
+    public int WIDTH = 50;
+    public int HEIGHT = 150;
+    private final int start_y;
+    private String name;
+    private int hp;
+    private int x, y;
+    private double vx, vy;
+    private double ax, ay;
+    public String state;
+    public Boolean jumped = false;
+    public Boolean slided = false;
+
+    public Player(String name, int start_y) {
+        this.name = name;
+        this.hp = 30;
+        this.x = 100;
+        this.start_y = start_y;
+        this.y = start_y;
+        this.vx = 2;
+        this.vy = 2;
+        this.ax = 0;
+        this.ay = 9.8;
 
 
-public class Player extends JPanel {
-    private int x;
-    private int y;
-    private int velocityY;
-    private int width = 50;
-    private int height = 100;
-
-    private PlayerState state;
-
-    public Player() {
-        x = 100;
-        y = 300;
-        velocityY = 2;
-        state = new RunningState(this);
     }
 
-    public void reset() {
-        x = 100;
-        y = 300;
-        velocityY = 2;
-        width = 50;
-        height = 100;
+    public void move() {
+        if (Objects.equals(state, "jumping")) {
+            if (jumped && y == start_y) {
+                state = "Normal";
+                jumped = false;
+            }
+            else {
+                System.out.println("x");
+                if (y == start_y) {
+                    vy = -20;
+                }
+                y += vy;
+                if (y < start_y) {
+                    vy++;
+                }
+                if (y > start_y) {
+                    y = start_y;
+                    vy = 0;
+                }
+                jumped = true;
+            }
+        }
+        if (Objects.equals(state, "sliding") && !slided) {
+            System.out.println("1");
+            int H = HEIGHT;
+            HEIGHT = WIDTH;
+            WIDTH = H;
+            y = y - (HEIGHT - WIDTH);
+            slided = true;
+
+        }
+        if (Objects.equals(state, "stopSliding")) {
+            int H = HEIGHT;
+            HEIGHT = WIDTH;
+            WIDTH = H;
+            state = "Normal";
+            slided = false;
+            y = start_y;
+        }
+
     }
 
     public int getX() {
-        return x;
+        return (int) x;
     }
 
     public int getY() {
-        return y;
+        return (int) y;
     }
 
-    public int getVelocityY() {
-        return velocityY;
+    public boolean dead() {
+        return x <= 0;
     }
 
-    public PlayerState getState() {
-        return state;
+    public void initializeState() {
+        jumped = false;
+        slided = false;
     }
 
-    public void setVelocityY(int velocityY) {
-        this.velocityY = velocityY;
+    public Rectangle getBounds() {
+        return new Rectangle(x, y, WIDTH, HEIGHT);
     }
 
-    public void setY(int y) {
-        this.y = y;
-    }
 
-    public void setState(PlayerState state){
-        this.state = state;
-    }
-
-    @Override
-    public int getHeight() {
-        return height;
-    }
-
-    @Override
-    public int getWidth() {
-        return width;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        g.fillRect(x, y, width, height); // draw the player as a rectangle
-    }
 }

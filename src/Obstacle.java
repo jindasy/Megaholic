@@ -1,57 +1,57 @@
+import java.awt.*;
+
 public class Obstacle{
 
-    public static final int MAX_HEALTH = 20;
-    public static final float MAX_V = 1.0f;
-    public static int SIZE = 30;
+	public static final int MAX_HEALTH = 20;
+	public static final float MAX_V = 1.0f;
+	public static int SIZE = 30;
 
-    private String name;
-    private int hp;
-    private float x, y;
-    private float vx;
+	private String name;
+	private int hp;
+	private int x, y;
+	private float vx;
 
-    private int size;
-
-    private double obstacleSpeed = 1;
+	private int size;
 
 
-    public Obstacle(String name, int x, int y, int size) {
-        this.name = name;
-        this.hp = 30;
-        this.x = x;
-        this.y = y;
-        SIZE = size;
-        this.vx = 2;
-    }
+	public Obstacle(String name, int x, int y, int size) {
+		this.name = name;
+		this.hp = 30;
+		this.x = x;
+		this.y = y;
+		SIZE = size;
+		this.vx = 2;
+	}
 
-    public void move() {
-        if (dead()) {
-            return;
-        }
-        x -= vx * obstacleSpeed;
+	public void move() {
+		if (dead()) {
+			return;
+		}
+		x -= vx;
 
-    }
+	}
 
-    public int getX() {
-        return (int) x;
-    }
+	public int getX() {
+		return (int) x;
+	}
 
-    public int getY() {
-        return (int) y;
-    }
+	public int getY() {
+		return (int) y;
+	}
 
-    public boolean dead() {
-        return x <= 0;
-    }
+	public boolean dead() {
+		return x <= 0;
+	}
 
-    public void reset(String name, int x, int y, int size) {
-        this.name = name;
-        this.x = x;
-        this.y = y;
-        this.size = size;
-    }
+	public void reset(String name, int x, int y, int size) {
+		this.name = name;
+		this.x = x;
+		this.y = y;
+		this.size = size;
+	}
 
-    public void increaseObstacleSpeed() {
-        obstacleSpeed = obstacleSpeed + (0.001);
-    }
+	public Rectangle getBounds() {
+		return new Rectangle(x, y, SIZE, SIZE);
+	}
 
 }

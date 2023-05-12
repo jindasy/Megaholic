@@ -1,0 +1,182 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.util.Observable;
+import java.util.Observer;
+
+public class Window2 extends JFrame implements Observer {
+
+    private int size = 600;
+    private GameLogic2 gameLogic = new GameLogic2();
+    private Renderer renderer;
+    private Gui gui;
+    Player player1 = gameLogic.getPlayer1();
+    Player player2 = gameLogic.getPlayer2();
+
+    ImageIcon img = new ImageIcon("images/2-player-bg.png");
+
+
+    public Window2() {
+        super();
+        addKeyListener(new Controller());
+        setLayout(new BorderLayout());
+        renderer = new Renderer();
+        add(renderer, BorderLayout.CENTER);
+        gui = new Gui();
+        add(gui, BorderLayout.SOUTH);
+        gameLogic.addObserver(this);
+        setSize(size, size);
+        setAlwaysOnTop(true);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        renderer.repaint();
+
+        if (gameLogic.isGameOver()){
+            String message;
+            if (gameLogic.winner == 1) {
+                message = "Player 1 wins!";
+            }
+            else {
+                message = "Player 2 wins!";
+            }
+            gui.showGameOverLabel(message);
+        }
+
+
+    }
+
+
+    class Renderer extends JPanel {
+
+        public Renderer() {
+            setDoubleBuffered(true);
+        }
+
+        @Override
+        public void paint(Graphics g) {
+            super.paint(g);
+            g.drawImage(img.getImage(), 0,0, null);
+            paintObstacles(g);
+            paintPlayer(g);
+        }
+
+        private void paintPlayer(Graphics g) {
+            g.setColor(Color.blue);
+            g.fillRect(player1.getX(), player1.getY(), player1.WIDTH, player1.HEIGHT );
+            g.fillRect(player2.getX(), player2.getY(), player2.WIDTH, player2.HEIGHT );
+        }
+
+        private void paintObstacles(Graphics g) {
+            g.setColor(Color.red);
+            for(Obstacle e : gameLogic.getObstacle()) {
+                int x = e.getX();
+                int y = e.getY();
+                g.fillRect(x,y,30, 30);
+            }
+        }
+    }
+
+    class Gui extends JPanel {
+
+        private JLabel tickLabel;
+        private JButton startButton;
+        private JButton replayButton;
+        private JLabel gameOverLabel;
+
+        public Gui() {
+            setLayout(new FlowLayout());
+            startButton = new JButton("Start");
+            startButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    gameLogic.start();
+                    startButton.setEnabled(false);
+                    Window2.this.requestFocus();
+                    startButton.setVisible(false);
+                    replayButton.setVisible(false);
+                }
+            });
+            add(startButton);
+            replayButton = new JButton("Play again");
+            replayButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    gameLogic.start();
+                    JFrame frame = new Window2();
+                    frame.setVisible(true);
+                    frame.dispose();
+                    startButton.setEnabled(false);
+                    gameOverLabel.setVisible(false);
+                    replayButton.setVisible(false);
+                }
+            });
+            replayButton.setVisible(false);
+            add(replayButton);
+            gameOverLabel = new JLabel("GAME OVER");
+            gameOverLabel.setForeground(Color.red);
+            gameOverLabel.setVisible(false);
+            add(gameOverLabel);
+        }
+
+
+
+        public void showGameOverLabel(String message) {
+            gameOverLabel.setVisible(true);
+            gameOverLabel.setText(message);
+            replayButton.setVisible(true);
+            replayButton.setEnabled(true);
+
+        }
+
+    }
+
+    class Controller extends KeyAdapter {
+
+        @Override
+        public void keyPressed(KeyEvent e) {
+            if (e.getKeyCode() == KeyEvent.VK_UP) {
+                System.out.println("Jump1");
+                player1.state = "jumping";
+
+            }
+            if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+                System.out.println("Slide1");
+                player1.state = "sliding";
+            }
+            if (e.getKeyCode() == KeyEvent.VK_W) {
+                System.out.println("Jump2");
+                player2.state = "jumping";
+
+            }
+            if (e.getKeyCode() == KeyEvent.VK_S) {
+                System.out.println("Slide2");
+                player2.state = "sliding";
+            }
+
+        }
+        @Override
+        public void keyReleased(KeyEvent e) {
+            if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+                System.out.println("Stop sliding1");
+                player1.state = "stopSliding";
+            }
+            if (e.getKeyCode() == KeyEvent.VK_S) {
+                System.out.println("Stop sliding2");
+                player2.state = "stopSliding";
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        Window2 window2 = new Window2();
+        window2.setVisible(true);
+    }
+
+}
+
