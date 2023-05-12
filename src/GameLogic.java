@@ -13,7 +13,7 @@ public class GameLogic extends Observable {
     private Player player = new Player("a", 390);
     private Thread thread;
     private boolean running;
-    private ObstaclesPool obstaclePool = new ObstaclesPool();
+    private ObstaclesPool obstaclePool =ObstaclesPool.getInstance();
     Timer timer = new Timer();
 
 

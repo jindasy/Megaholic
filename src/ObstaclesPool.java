@@ -6,7 +6,14 @@ import java.util.Random;
 public class ObstaclesPool {
     private List<Obstacle> obstacles = new ArrayList<Obstacle>();
     private int index;
+    private static ObstaclesPool instance;
     private Random random = new Random();
+    public static ObstaclesPool getInstance(){
+        if (instance == null){
+            instance = new ObstaclesPool();
+        }
+        return instance;
+    }
 
     public ObstaclesPool() {
         for(int i = 0; i < 1000; i++) {

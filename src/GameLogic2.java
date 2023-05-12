@@ -16,7 +16,7 @@ public class GameLogic2 extends Observable {
     private Thread thread;
     private boolean running;
     public int winner;
-    private ObstaclesPool obstaclePool = new ObstaclesPool();
+    private ObstaclesPool obstaclePool = ObstaclesPool.getInstance();
     Timer timer = new Timer();
 
 
