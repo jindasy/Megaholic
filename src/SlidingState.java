@@ -6,7 +6,6 @@ public class SlidingState extends PlayerState {
         this.player = player;
     }
 
-
     public void move() {
         if (!player.slided) {
             int H = player.getHEIGHT();

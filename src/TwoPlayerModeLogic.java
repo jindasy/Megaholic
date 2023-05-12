@@ -43,7 +43,6 @@ public class TwoPlayerModeLogic extends Observable {
                 start_x += obstacle_size * 6;
             }
         }
-
     }
 
 

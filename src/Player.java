@@ -85,6 +85,4 @@ public class Player{
     public Rectangle getBounds() {
         return new Rectangle(x, y, WIDTH, HEIGHT);
     }
-
-
 }

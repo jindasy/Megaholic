@@ -3,13 +3,10 @@ import java.awt.*;
 public class Obstacle {
 
 	public static int SIZE = 30;
-
 	private float x, y;
 	private float vx;
-
 	private int size;
 	private boolean isJump;
-
 	private double obstacleSpeed = 1;
 
 	public Obstacle(int x, int y, int size, boolean isJump) {
@@ -18,7 +15,6 @@ public class Obstacle {
 		SIZE = size;
 		this.vx = 2;
 		this.isJump = isJump;
-
 	}
 
 	public void move() {

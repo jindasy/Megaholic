@@ -136,7 +136,6 @@ public class OnePlayerModeUI extends JFrame implements Observer {
             replayButton.setVisible(false);
             add(replayButton);
 
-
             backToMain = new JButton("Back to main");
             backToMain.addActionListener(new ActionListener() {
                 @Override
@@ -162,9 +161,7 @@ public class OnePlayerModeUI extends JFrame implements Observer {
             gameOverLabel.setVisible(true);
             replayButton.setVisible(true);
             replayButton.setEnabled(true);
-
         }
-
     }
 
     class Controller extends KeyAdapter {
@@ -176,8 +173,8 @@ public class OnePlayerModeUI extends JFrame implements Observer {
             if (e.getKeyCode() == KeyEvent.VK_DOWN) {
                 player.state = "sliding";
             }
-
         }
+
         @Override
         public void keyReleased(KeyEvent e) {
             if (e.getKeyCode() == KeyEvent.VK_DOWN) {
@@ -185,7 +182,5 @@ public class OnePlayerModeUI extends JFrame implements Observer {
             }
         }
     }
-
-
 }
 

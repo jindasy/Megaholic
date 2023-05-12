@@ -34,7 +34,6 @@ public class OnePlayerModeLogic extends Observable {
             }
             start_x += 2* Obstacle.SIZE + 50;
         }
-
     }
 
     public void start() {
@@ -80,7 +79,6 @@ public class OnePlayerModeLogic extends Observable {
             obstacles.clear();
             player = new Player(315);
         }
-
     }
 
     public int getScore() {
@@ -90,7 +88,6 @@ public class OnePlayerModeLogic extends Observable {
     public boolean isGameOver() {
         return !running;
     }
-
 
     public Player getPlayer() {
         return player;

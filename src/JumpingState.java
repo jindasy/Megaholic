@@ -5,7 +5,6 @@ public class JumpingState extends PlayerState{
         this.player = player;
     }
 
-
     public void move() {
         if (player.jumped && player.getY() == player.getStart_y()) {
             player.setState("Normal");
