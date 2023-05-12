@@ -51,7 +51,7 @@ public class GameLogic extends Observable {
                 while (running) {
                     for (Obstacle obstacle : obstacles) {
                         if ((player.getBounds().intersects(obstacle.getBounds()))) {
-                           // game over
+                            // game over
                             running = false;
                         }
                         if (obstacle.dead()) {
