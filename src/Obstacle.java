@@ -51,7 +51,7 @@ public class Obstacle{
     }
 
     public void increaseObstacleSpeed() {
-        obstacleSpeed = obstacleSpeed + (0.001);
+        obstacleSpeed = obstacleSpeed + (0.0005);
     }
 
 }

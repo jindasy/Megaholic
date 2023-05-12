@@ -57,7 +57,6 @@ public class GameLogic extends JFrame {
     private void start() {
         running = true;
 
-
         thread = new Thread() {
             @Override
             public void run() {
@@ -73,7 +72,7 @@ public class GameLogic extends JFrame {
                                 obstacle.increaseObstacleSpeed();
                                 obstacle.move();
                             }
-                        }, 0, 5*60*1000);
+                        }, 5, 5*60*1000);
                         isGameOver();
                     }
                     panel.repaint();
