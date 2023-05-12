@@ -117,7 +117,7 @@ public class Obstacle {
 		this.isJump=isJump;
 	}
 	public Rectangle getBounds() {
-		return new Rectangle((int)x+30, (int)y, SIZE-10, SIZE);
+		return new Rectangle((int)x+20, (int)y, SIZE-10, SIZE);
 	}
 
 	public void increaseObstacleSpeed() {

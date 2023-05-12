@@ -11,8 +11,8 @@ public class GameLogic2 extends Observable {
 
     public static final int SIZE = 800;
     private List<Obstacle> obstacles = new ArrayList<Obstacle>();
-    private Player player1 = new Player("a", 345);
-    private Player player2 = new Player("b", 80);
+    private Player player1 = new Player("a", 400);
+    private Player player2 = new Player("b", 140);
     private Thread thread;
     private boolean running;
     public int winner;
@@ -62,12 +62,12 @@ public class GameLogic2 extends Observable {
                         if ((player1.getBounds().intersects(obstacle.getBounds()))) {
                             // game over
                             running = false;
-                            winner = 1;
+                            winner = 2;
 
                         } else if ((player2.getBounds().intersects(obstacle.getBounds()))) {
                             // game over
                             running = false;
-                            winner = 2;
+                            winner = 1;
 
                         }
                         if (obstacle.dead()) {
@@ -83,7 +83,6 @@ public class GameLogic2 extends Observable {
                     }
                     player1.move();
                     player2.move();
-                    // TODO score
                     setChanged();
                     notifyObservers();
 

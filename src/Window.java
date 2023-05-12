@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.Objects;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -17,6 +18,9 @@ public class Window extends JFrame implements Observer {
     private Gui gui;
     Player player = gameLogic.getPlayer();
     ImageIcon img = new ImageIcon("images/1-player-bg.png");
+    ImageIcon imgPlayer = new ImageIcon("images/magman-run.gif");
+    ImageIcon imgPlayerSlide = new ImageIcon("images/magman-slide.gif");
+
 
     private JFrame parent = this;
     ImageIcon imageObstacle;
@@ -69,7 +73,12 @@ public class Window extends JFrame implements Observer {
 
         private void paintPlayer(Graphics g) {
             g.setColor(Color.blue);
-            g.fillRect(player.getX(), player.getY(), player.WIDTH-30, player.HEIGHT-30 );
+//            g.fillRect(player.getX(), player.getY(), player.WIDTH, player.HEIGHT );
+            if (player.slided) {
+                g.drawImage(imgPlayerSlide.getImage(), player.getX(), player.getY(), player.WIDTH, player.HEIGHT, null);
+            } else {
+                g.drawImage(imgPlayer.getImage(), player.getX(), player.getY(), player.WIDTH, player.HEIGHT, null);
+            }
         }
 
         private void paintObstacles(Graphics g) {
@@ -111,6 +120,10 @@ public class Window extends JFrame implements Observer {
                 }
             });
             add(startButton);
+            gameOverLabel = new JLabel("GAME OVER");
+            gameOverLabel.setForeground(Color.red);
+            gameOverLabel.setVisible(false);
+            add(gameOverLabel);
             replayButton = new JButton("Play again");
             replayButton.addActionListener(new ActionListener() {
                 @Override
@@ -126,10 +139,7 @@ public class Window extends JFrame implements Observer {
             });
             replayButton.setVisible(false);
             add(replayButton);
-            gameOverLabel = new JLabel("GAME OVER");
-            gameOverLabel.setForeground(Color.red);
-            gameOverLabel.setVisible(false);
-            add(gameOverLabel);
+
 
             backToMain = new JButton("Back to main");
             backToMain.addActionListener(new ActionListener() {
@@ -173,10 +183,13 @@ public class Window extends JFrame implements Observer {
             if (e.getKeyCode() == KeyEvent.VK_UP) {
                 System.out.println("Jump");
                 player.state = "jumping";
+//                new JumpingState(player);
+
             }
             if (e.getKeyCode() == KeyEvent.VK_DOWN) {
                 System.out.println("Slide");
                 player.state = "sliding";
+//                new StopSlidingState(player);
             }
 
         }
@@ -185,6 +198,7 @@ public class Window extends JFrame implements Observer {
             if (e.getKeyCode() == KeyEvent.VK_DOWN) {
                 System.out.println("Stop sliding");
                 player.state = "stopSliding";
+//                new StopSlidingState(player);
             }
         }
     }

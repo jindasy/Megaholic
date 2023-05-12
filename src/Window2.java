@@ -19,9 +19,9 @@ public class Window2 extends JFrame implements Observer {
     ImageIcon img = new ImageIcon("images/2-player-bg.png");
     Image imageObstacle;
     Image imageObstacle2;
-
-
     JFrame parent = this;
+    ImageIcon imgPlayer = new ImageIcon("images/magman-run.gif");
+    ImageIcon imgPlayerSlide = new ImageIcon("images/magman-slide.gif");
 
 
     public Window2() {
@@ -54,8 +54,6 @@ public class Window2 extends JFrame implements Observer {
             }
             gui.showGameOverLabel(message);
         }
-
-
     }
 
 
@@ -75,8 +73,19 @@ public class Window2 extends JFrame implements Observer {
 
         private void paintPlayer(Graphics g) {
             g.setColor(Color.blue);
-            g.fillRect(player1.getX(), player1.getY(), player1.WIDTH, player1.HEIGHT );
-            g.fillRect(player2.getX(), player2.getY(), player2.WIDTH, player2.HEIGHT );
+            if (player1.slided) {
+                g.drawImage(imgPlayerSlide.getImage(), player1.getX(), player1.getY(), player1.WIDTH, player1.HEIGHT, null);
+
+            } else {
+                g.drawImage(imgPlayer.getImage(), player1.getX(), player1.getY(), player1.WIDTH, player1.HEIGHT, null);
+            }
+            g.drawString("Player 1", player1.getX(), player1.getY()-10);
+            if (player2.slided) {
+                g.drawImage(imgPlayerSlide.getImage(), player2.getX(), player2.getY(), player2.WIDTH, player2.HEIGHT, null);
+            } else {
+                g.drawImage(imgPlayer.getImage(), player2.getX(), player2.getY(), player2.WIDTH, player2.HEIGHT, null);
+            }
+            g.drawString("Player 2", player2.getX(), player2.getY()-10);
         }
 
         private void paintObstacles(Graphics g) {
@@ -170,20 +179,24 @@ public class Window2 extends JFrame implements Observer {
             if (e.getKeyCode() == KeyEvent.VK_UP) {
                 System.out.println("Jump1");
                 player1.state = "jumping";
+//                new JumpingState(player1);
 
             }
             if (e.getKeyCode() == KeyEvent.VK_DOWN) {
                 System.out.println("Slide1");
                 player1.state = "sliding";
+//                new SlidingState(player1);
             }
             if (e.getKeyCode() == KeyEvent.VK_W) {
                 System.out.println("Jump2");
                 player2.state = "jumping";
+//                new JumpingState(player2);
 
             }
             if (e.getKeyCode() == KeyEvent.VK_S) {
                 System.out.println("Slide2");
                 player2.state = "sliding";
+//                new SlidingState(player2);
             }
 
         }
@@ -192,10 +205,12 @@ public class Window2 extends JFrame implements Observer {
             if (e.getKeyCode() == KeyEvent.VK_DOWN) {
                 System.out.println("Stop sliding1");
                 player1.state = "stopSliding";
+//                new StopSlidingState(player1);
             }
             if (e.getKeyCode() == KeyEvent.VK_S) {
                 System.out.println("Stop sliding2");
                 player2.state = "stopSliding";
+//                new StopSlidingState(player2);
             }
         }
     }
