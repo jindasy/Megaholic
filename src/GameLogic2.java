@@ -6,8 +6,8 @@ public class GameLogic2 extends Observable {
 
     public static final int SIZE = 800;
     private List<Obstacle> obstacles = new ArrayList<Obstacle>();
-    private Player player1 = new Player("a", 390);
-    private Player player2 = new Player("b", 110);
+    private Player player1 = new Player("a", 345);
+    private Player player2 = new Player("b", 80);
     private Thread thread;
     private boolean running;
     public int winner;

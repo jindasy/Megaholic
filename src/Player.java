@@ -38,9 +38,8 @@ public class Player{
                 jumped = false;
             }
             else {
-                System.out.println("x");
                 if (y == start_y) {
-                    vy = -20;
+                    vy = -30;
                 }
                 y += vy;
                 if (y < start_y) {
@@ -54,7 +53,6 @@ public class Player{
             }
         }
         if (Objects.equals(state, "sliding") && !slided) {
-            System.out.println("1");
             int H = HEIGHT;
             HEIGHT = WIDTH;
             WIDTH = H;
